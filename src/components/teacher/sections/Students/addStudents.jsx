@@ -56,6 +56,7 @@ const AddStudents = () => {
       const response = await fetch("https://e-school-server.vercel.app/api/students", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(formData),
       });
 

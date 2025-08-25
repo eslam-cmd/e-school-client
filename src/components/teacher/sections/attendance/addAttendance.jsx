@@ -79,6 +79,7 @@ export default function AddAttendance() {
     try {
       const res = await fetch("https://e-school-server.vercel.app/api/attendance", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           student_id: attendanceData.studentId,

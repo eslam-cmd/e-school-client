@@ -32,7 +32,7 @@ import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
 import {DeleteIcon} from "@mui/icons-material/Delete";
 import { FiTrash2,FiEdit} from "react-icons/fi";
-import { FiRefreshCw } from "react-icons/fi";const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://e-school-server.vercel.app";
+import { FiRefreshCw } from "react-icons/fi";const API_URL ="https://e-school-server.vercel.app";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({ 
   padding: theme.spacing(3), 
@@ -174,6 +174,7 @@ export default function ViewPracticalNotes() {
       const res = await fetch(`${API_URL}/api/sabject/${editData.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           sabject_title: editData.sabject_title,
           sabject_name: editData.sabject_name,

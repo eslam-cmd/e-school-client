@@ -21,7 +21,7 @@ import { styled } from "@mui/material/styles";
 
 import { CheckCircle, Error as ErrorIcon } from "@mui/icons-material";
 // قاعدة الـ API (يمكنك تغييرها في .env.local)
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://e-school-server.vercel.app";
+const API_URL =  "https://e-school-server.vercel.app";
 
 const FormContainer = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
@@ -116,6 +116,7 @@ const AddPracticalQuiz = () => {
       const res = await fetch(`${API_URL}/api/practical-quiz`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({...quizData, type: "practical"}),
       });
       const result = await res.json();

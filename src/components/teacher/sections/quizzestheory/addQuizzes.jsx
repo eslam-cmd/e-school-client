@@ -125,6 +125,7 @@ const [modal, setModal] = useState({
     try {
       const res = await fetch(`${API_URL}/api/quiz`, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(quizData),
       });

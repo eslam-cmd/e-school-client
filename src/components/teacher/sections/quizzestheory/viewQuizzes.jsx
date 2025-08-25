@@ -40,7 +40,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ViewQuizzes() {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://e-school-server.vercel.app";
+  const API_URL =  "https://e-school-server.vercel.app";
 
   const [quizzes, setQuizzes] = useState([]);
   const [students, setStudents] = useState([]);
@@ -156,6 +156,7 @@ export default function ViewQuizzes() {
       const res = await fetch(`${API_URL}/api/quiz/${editData.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(editData),
       });
       const payload = await res.json();
