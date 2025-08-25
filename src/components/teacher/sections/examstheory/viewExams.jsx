@@ -173,7 +173,6 @@ export default function ViewExams() {
       const res = await fetch(`${API_URL}/api/sabject/${editData.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({
           sabject_title: editData.sabject_title,
           sabject_name: editData.sabject_name,

@@ -122,7 +122,6 @@ const AddExams = () => {
       const res = await fetch(`${API_URL}/api/sabject`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(noteData),
       });
       // فتح المودال بنجاح

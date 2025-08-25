@@ -175,7 +175,6 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
       const res = await fetch(`${API_URL}/api/practical-quiz/${editData.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({
           quiz_title: editData.quiz_title,
           quiz_name: editData.quiz_name,

@@ -116,7 +116,6 @@ const AddPracticalQuiz = () => {
       const res = await fetch(`${API_URL}/api/practical-quiz`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({...quizData, type: "practical"}),
       });
       const result = await res.json();

@@ -185,7 +185,6 @@ export default function DashboardAdmin() {
   }, []); 
   useEffect(() => {
     fetch("https://e-school-server.vercel.app/api/teacher/me", {
-      credentials: "include",
     })
       .then(res => res.json())
       .then(data => {

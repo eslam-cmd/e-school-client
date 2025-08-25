@@ -156,7 +156,6 @@ export default function ViewQuizzes() {
       const res = await fetch(`${API_URL}/api/quiz/${editData.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(editData),
       });
       const payload = await res.json();

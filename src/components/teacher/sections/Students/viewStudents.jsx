@@ -161,7 +161,6 @@ export default function ViewStudents() {
       const res = await fetch(`https://e-school-server.vercel.app/api/students/${selectedStudent.student_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify(formData)
       });
       

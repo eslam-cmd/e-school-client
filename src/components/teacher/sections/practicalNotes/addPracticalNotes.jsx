@@ -116,7 +116,6 @@ const AddPracticalNotes = () => {
       const res = await fetch(`${API_URL}/api/practical-notes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({...noteData , type: "practical"}),
       });
       const result = await res.json();

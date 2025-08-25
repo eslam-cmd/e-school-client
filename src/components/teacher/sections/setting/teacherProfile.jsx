@@ -65,7 +65,6 @@ const TeacherProfileCard = () => {
       const res = await fetch("https://e-school-server.vercel.app/api/teacher/update", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
         body: JSON.stringify({
           id: newId, // إرسال الـ ID الجديد للسيرفر
           name: profile.name,

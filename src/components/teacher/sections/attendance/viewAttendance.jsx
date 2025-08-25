@@ -175,7 +175,6 @@ export default function ViewAttendance() {
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          credentials: "include",
           body: JSON.stringify({
             attendance_date: editData.attendance_date,
             status: editData.status,

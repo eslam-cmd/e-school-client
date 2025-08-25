@@ -48,7 +48,7 @@ export default function TeacherLoginPage() {
     try {
       const res = await fetch("https://e-school-server.vercel.app/api/auth/login", {
         method: "POST",
-        credentials: "include",
+        
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ student_id: studentId }),
       });
