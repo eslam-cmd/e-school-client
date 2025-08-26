@@ -33,6 +33,8 @@ import { styled } from "@mui/material/styles";
 import { FiRefreshCw } from "react-icons/fi";
 import { CheckCircle, Error as ErrorIcon } from "@mui/icons-material";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:hover": {
     backgroundColor: theme.palette.grey[50],
@@ -123,8 +125,8 @@ export default function ViewStudents() {
     name: "",
     specialization: "",
     section: "",
-    nameSchool: "",
-    guardianNum: "",
+    nameschool: "",
+    guardiannum: "",
     phone: ""
   });
 
@@ -148,8 +150,8 @@ export default function ViewStudents() {
       name: student.name || "",
       specialization: student.specialization || "",
       section: student.section || "",
-      nameSchool: student.nameSchool || "",
-      guardianNum: student.guardianNum || "",
+      nameschool: student.nameschool || "",
+      guardiannum: student.guardiannum || "",
       phone: student.phone || ""
     });
     setEditModalOpen(true);
@@ -436,13 +438,13 @@ export default function ViewStudents() {
 
                       <TableCell sx={{ textAlign: "right" }}>
                         <Typography variant="body2" sx={{ color: "grey.500" }}>
-                          {student.nameSchool || "لا يوجد"}
+                          {student.nameschool || "لا يوجد"}
                         </Typography>
                       </TableCell>
 
                       <TableCell sx={{ textAlign: "right" }}>
                         <Typography variant="body2" sx={{ color: "grey.500" }}>
-                          {student.guardianNum || "لا يوجد"}
+                          {student.guardiannum || "لا يوجد"}
                         </Typography>
                       </TableCell>
 
@@ -540,7 +542,7 @@ export default function ViewStudents() {
                     المدرسة
                   </Typography>
                   <Typography variant="body2" sx={{ fontWeight: "medium" }}>
-                    {selectedStudent.nameSchool || "غير متوفر"}
+                    {selectedStudent.nameschool || "غير متوفر"}
                   </Typography>
                 </Box>
                 <Divider />
@@ -548,18 +550,53 @@ export default function ViewStudents() {
                   <Typography variant="body2" sx={{ color: "grey.600" }}>
                     رقم ولي الأمر
                   </Typography>
-                  <Typography variant="body2" sx={{ fontWeight: "medium" }}>
-                    {selectedStudent.guardianNum || "غير متوفر"}
-                  </Typography>
+                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                   <Typography variant="body2" sx={{ fontWeight: "medium" }}>
+      {/* عرض الرقم مع رمز الدولة */}
+      {selectedStudent.guardiannum
+        ? `+963${selectedStudent.guardiannum}`
+        : "غير متوفر"}
+    </Typography>
+
+      {selectedStudent.guardiannum && (
+        <IconButton
+          color="success"
+          component="a"
+          href={`https://wa.me/${selectedStudent.guardiannum}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          
+        >
+          <WhatsAppIcon />
+        </IconButton>
+      )}
+    </Box>
                 </Box>
                 <Divider />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography variant="body2" sx={{ color: "grey.600" }}>
                     الهاتف
                   </Typography>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                   <Typography variant="body2" sx={{ fontWeight: "medium" }}>
-                    {selectedStudent.phone || "غير متوفر"}
-                  </Typography>
+      {/* عرض الرقم مع رمز الدولة */}
+      {selectedStudent.phone
+        ? `+963${selectedStudent.phone}`
+        : "غير متوفر"}
+    </Typography>
+      {selectedStudent.phone && (
+        <IconButton
+          color="success"
+          component="a"
+          href={`https://wa.me/${selectedStudent.phone}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <WhatsAppIcon />
+        </IconButton>
+      )}
+    </Box>
+
                 </Box>
                 <Divider />
               </Box>
@@ -625,14 +662,14 @@ export default function ViewStudents() {
                 <TextField
                   fullWidth
                   label="المدرسة"
-                  value={formData.nameSchool}
-                  onChange={(e) => setFormData({...formData, nameSchool: e.target.value})}
+                  value={formData.nameschool}
+                  onChange={(e) => setFormData({...formData, nameschool: e.target.value})}
                 />
                 <TextField
                   fullWidth
                   label="رقم ولي الأمر"
-                  value={formData.guardianNum}
-                  onChange={(e) => setFormData({...formData, guardianNum: e.target.value})}
+                  value={formData.guardiannum}
+                  onChange={(e) => setFormData({...formData, guardiannum: e.target.value})}
                 />
                 <TextField
                   fullWidth

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/navigation"; // تأكد من الاستيراد الصحيح
+import {  InputAdornment } from "@mui/material";
 
 import { CheckCircle, Error as ErrorIcon } from "@mui/icons-material";
 const FormContainer = styled(Paper)(({ theme }) => ({
@@ -120,7 +121,10 @@ const AddStudents = () => {
             value={formData.guardianNum}
             onChange={handleChange}
             variant="outlined"
-            placeholder="أدخل رقم ولي الامر"
+            placeholder="98xxxxxxx"
+            InputProps={{
+              startAdornment: <InputAdornment position="start">+963</InputAdornment>,
+            }}
           />
         </Grid><Grid item xs={12} sm={6}>
           <TextField
@@ -165,7 +169,11 @@ const AddStudents = () => {
             value={formData.phone}
             onChange={handleChange}
             variant="outlined"
-            placeholder="09xxxxxxxx"
+            placeholder="98xxxxxxx"
+            InputProps={{
+              startAdornment: <InputAdornment position="start">+963</InputAdornment>,
+            }}
+          
           />
         </Grid>
 

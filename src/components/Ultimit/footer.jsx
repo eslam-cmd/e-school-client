@@ -84,30 +84,8 @@ const Footer = () => {
               وأفضل المدربين.
             </Typography>
 
-            {/* وسائل التواصل الاجتماعي */}
-            <Stack direction="row" spacing={1} sx={{ mb: 3 }}>
-              <IconButton
-                sx={{
-                  bgcolor: "primary.main",
-                  color: "white",
-                  "&:hover": { bgcolor: "primary.dark" },
-                }}
-              >
-                <Facebook />
-              </IconButton>
-             
-            
-              <IconButton
-                sx={{
-                  bgcolor: "error.main",
-                  color: "white",
-                  "&:hover": { bgcolor: "error.dark" },
-                }}
-              >
-                <Instagram />
-              </IconButton>
-             
-            </Stack>
+        
+        
           </Grid>
 
           {/* روابط سريعة */}
@@ -134,14 +112,19 @@ const Footer = () => {
                 </Typography>
                  
               </Box>
-              <Box sx={{ display: "flex", alignItems: "center", mb: 1,direction: "ltr" }}>
-                <Email
-                  sx={{ color: "primary.main", mr: 1, fontSize: "1rem", }}
+              <Box sx={{ display: "flex", alignItems: "center",direction: "ltr" }}>
+                <Facebook
+                  sx={{ color: "primary.main", mr: 1, fontSize: "1rem" }}
                 />
-                <Typography variant="body2" color="text.secondary">
-                  info@future-academy.edu
+              
+              <Link href="https://www.facebook.com/share/19mM3fEsd7/" style={{textDecoration:"none"}}>
+                <Typography variant="body2" color="text.secondary"
+                
+                >
+                   {" "}
+                   معهد الاوائل
                 </Typography>
-               
+                </Link>
               </Box>
               <Box sx={{ display: "flex", alignItems: "center",direction: "ltr" }}>
                 <LocationOn
