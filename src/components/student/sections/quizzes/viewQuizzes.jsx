@@ -87,9 +87,9 @@ export default function ViewQuizByMonth() {
   return (
     <StyledPaper>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-        <Typography variant="h5" fontWeight={700} color="text.primary">
+        <Typography variant="h5" fontWeight={700} color="text.primary" sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}}>
         <FiBookOpen style={{color:"#2A52BE"}} />
-          سجل الاختبارات القصيرة حسب الأشهر
+          سجل الاختبارات النظرية
         </Typography>
         <IconButton
           onClick={async () => setQuiz(await fetchQuiz())}

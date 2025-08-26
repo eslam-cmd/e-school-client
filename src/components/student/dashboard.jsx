@@ -80,7 +80,7 @@ const SidebarContent = ({ tabs, activeTab, onTabClick, onLogout }) => {
       {/* Footer */}
       <Box sx={{ mt: 2, px: 2, py: 1, borderTop: 1, borderColor: "primary.main", textAlign: "center" }}>
         <Typography variant="caption" sx={{ color: "primary.main", fontWeight: 500 }}>
-          <BrushIcon style={{ fontSize: "10px" }} /> تمت برمجة الموقع بواسطة إسلام
+          <BrushIcon style={{ fontSize: "10px" }} /> تمت برمجة الموقع بواسطة إسلام هدايا
         </Typography>
       </Box>
     </Box>

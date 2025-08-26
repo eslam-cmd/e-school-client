@@ -54,6 +54,7 @@ import AddPracticalQuiz from"@/components/teacher/sections/practicalQuiz/addPrac
 import ViewPracticalQuiz from"@/components/teacher/sections/practicalQuiz/viewPracticalQuiz"
 // مكونات الصفحات (يجب استيرادها بشكل صحيح)
 
+import BrushIcon from '@mui/icons-material/Brush'
 
 const SIDEBAR_WIDTH = 280;
 const SIDEBAR_WIDTH_COLLAPSED = 70;
@@ -444,9 +445,9 @@ export default function DashboardAdmin() {
             textAlign: "center",
           }}
         >
-          <Typography variant="caption" color="text.secondary">
-            تمت برمجة الموقع بواسطة إسلام هدايا
-          </Typography>
+          <Typography variant="caption" sx={{ color: "primary.main", fontWeight: 500 }}>
+          <BrushIcon style={{ fontSize: "10px" }} /> تمت برمجة الموقع بواسطة إسلام هدايا
+        </Typography>
         </Box>
       )}
     </>

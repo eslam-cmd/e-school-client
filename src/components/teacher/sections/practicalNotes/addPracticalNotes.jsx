@@ -153,8 +153,8 @@ const AddPracticalNotes = () => {
   return (
     <>
     <FormContainer component="form" onSubmit={handleSubmit}>
-      <Typography variant="h6" fontWeight={600} mb={2} color="#1f2937">
-        إضافة مذاكرة لطالب
+      <Typography sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}} fontWeight={600} mb={2} color="#1f2937">
+        إضافة مذاكرة عملي لطالب
       </Typography>
 
       {fetchError && (

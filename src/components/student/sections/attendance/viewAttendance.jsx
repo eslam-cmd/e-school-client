@@ -71,10 +71,9 @@ export default function ViewAttendanceByMonth() {
     <Paper sx={{ p: 3, borderRadius: "1rem", backgroundColor: "#fff" }}>
       {/* عنوان وزر إعادة التحميل */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-        <Typography variant="h5" fontWeight={600} color="#1f2937">
+        <Typography variant="h5" fontWeight={600} color="#1f2937" sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}}>
         <FiCalendar style={{color:"#2A52BE"}}/>
-          سجل الحضور حسب الأشهر 
-          
+          سجل الحضور
         </Typography>
        
         <IconButton

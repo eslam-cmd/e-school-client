@@ -288,8 +288,7 @@ export default function ViewStudents() {
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <FiUsers style={{ fontSize: "1.5rem", color: "#2563eb" }} />
             <Typography
-              variant="h5"
-              sx={{ fontWeight: "bold", color: "grey.800" }}
+              sx={{ fontWeight: "bold", color: "grey.800",fontSize:{xs:"17px",md:"22px",lg:"25px"}}}
             >
               إدارة الطلاب
             </Typography>

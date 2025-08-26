@@ -276,10 +276,9 @@ export default function ViewQuizzes() {
               />
             </svg>
             <Typography
-              variant="h5"
-              sx={{ fontWeight: "bold", color: "grey.800" }}
+              sx={{ fontWeight: "bold", color: "grey.800", fontSize:{xs:"17px",md:"22px",lg:"25px"}}}
             >
-              إدارة الكويزات
+              إدارة الكويزات النظرية
             </Typography>
           </Box>
 

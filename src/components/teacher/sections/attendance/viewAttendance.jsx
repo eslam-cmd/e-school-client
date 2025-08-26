@@ -236,7 +236,7 @@ export default function ViewAttendance() {
         justifyContent="space-between"
         mb={2}
       >
-        <Typography variant="h6" fontWeight={600} color="#1f2937">
+        <Typography fontWeight={600} color="#1f2937" sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}}>
           سجل التفقد
         </Typography>
         <Button

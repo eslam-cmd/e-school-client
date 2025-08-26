@@ -85,9 +85,9 @@ export default function ViewPrecticalNotes() {
   return (
     <StyledPaper>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-        <Typography variant="h5" fontWeight={700} color="text.primary">
+        <Typography fontWeight={700} color="text.primary" sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}}>
         <FiClipboard style={{color:"#2A52BE"}}/>
-          سجل المذاكرة حسب الأشهر
+          سجل المذاكرات العملية
         </Typography>
         <IconButton
           onClick={async () => setNotes(await fetchNotes())}

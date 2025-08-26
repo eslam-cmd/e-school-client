@@ -121,10 +121,10 @@ export default function AddAttendance() {
     <>
       <FormContainer>
         <Typography
-          variant="h6"
           fontWeight={600}
           mb={2}
           color="#1f2937"
+          sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}}
         >
           تسجيل حالة الطالب
         </Typography>
