@@ -172,7 +172,7 @@ export default function TeacherLoginPage() {
               }}
               startIcon={<HomeIcon />}
             >
-              <Link href="/" style={{ color: "#ffff" }}>
+              <Link href="/" style={{ color: "#ffff",textDecoration:"none" }}>
                 {" "}
                 الرجوع الى الصفحة الرئيسية
               </Link>
@@ -203,7 +203,7 @@ export default function TeacherLoginPage() {
             sx={{ p: 2, textAlign: "center", bgcolor: "background.default" }}
           >
             <Typography variant="body2" color="text.secondary">
-              © 2025 Management System. All rights reserved.
+              © 2025 جميع الحقوق محفوظة
             </Typography>
           </Box>
         </Paper>
