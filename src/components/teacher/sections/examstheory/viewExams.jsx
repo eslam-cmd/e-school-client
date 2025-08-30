@@ -30,8 +30,6 @@ import {
 } from "@mui/material";
 import { FiTrash2,FiEdit } from "react-icons/fi";
 import { styled } from "@mui/material/styles";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { FiRefreshCw } from "react-icons/fi";const API_URL =  "https://e-school-server.vercel.app";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({ 
@@ -41,14 +39,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 // قائمة المواد
-const subjectOptions = [
-  "الرياضيات",
-  "الفيزياء",
-  "الكيمياء",
-  "اللغة العربية",
-  "اللغة الإنجليزية",
-  "الديانة",
-];
+const subjectOptions = ["Mathematics", "Physics", "Chemistry", "Arabic Language", "English Language", "Religion"];
 
 export default function ViewExams() { 
   const [loading, setLoading] = useState(false); 
@@ -85,8 +76,8 @@ export default function ViewExams() {
         fetch(`${API_URL}/api/students`),
         fetch(`${API_URL}/api/sabject`),
       ]); 
-      if (!studRes.ok) throw new Error("فشل جلب الطلاب"); 
-      if (!notesRes.ok) throw new Error("فشل جلب الملاحظات"); 
+      if (!studRes.ok) throw new Error("The failure to attract students"); 
+      if (!notesRes.ok) throw new Error("Failed to fetch the notes."); 
 
       const studentsData = await studRes.json();
       const notesData = await notesRes.json();
@@ -107,7 +98,7 @@ export default function ViewExams() {
       setNotes(notesWithNames);
     } catch (err) { 
       console.error(err);
-      setError("فشل في تحميل البيانات. تأكد من اتصال الخادم.");
+      setError("Failed to load data. Please check the server connection.");
     } finally { 
       setLoading(false); 
     } 
@@ -119,14 +110,14 @@ export default function ViewExams() {
 
   // حذف ملاحظة
   const handleDelete = async (id) => { 
-    if (!confirm("هل أنت متأكد من الحذف نهائيًا؟")) return; 
+    if (!confirm("Are you sure you want to delete it permanently?")) return; 
     try { 
       const res = await fetch(`${API_URL}/api/sabject/${id}`, { method: "DELETE" }); 
-      if (!res.ok) throw new Error("فشل الحذف"); 
+      if (!res.ok) throw new Error("Delete error"); 
       setNotes((prev) => prev.filter((n) => n.id !== id)); 
     } catch (err) { 
       console.error(err); 
-      alert("حدث خطأ أثناء الحذف"); 
+      alert("An error occurred while deleting."); 
     } 
   };
 
@@ -155,10 +146,10 @@ export default function ViewExams() {
   // تحقق قبل الحفظ
   const validateEdit = () => { 
     const errs = {}; 
-    if (!editData.sabject_title.trim()) errs.sabject_title = "العنوان مطلوب"; 
-    if (!editData.sabject_name) errs.sabject_name = "اختر المادة"; 
-    if (!editData.sabject_date) errs.sabject_date = "التاريخ مطلوب"; 
-    if (!editData.sabject_grade.toString().trim()) errs.sabject_grade = "العلامة مطلوبة"; 
+    if (!editData.sabject_title.trim()) errs.sabject_title = "The title is required."; 
+    if (!editData.sabject_name) errs.sabject_name = "Choose the subject"; 
+    if (!editData.sabject_date) errs.sabject_date = "History is required."; 
+    if (!editData.sabject_grade.toString().trim()) errs.sabject_grade = "The mark is required."; 
     setEditErrors(errs); 
     return Object.keys(errs).length === 0; 
   };
@@ -183,7 +174,7 @@ export default function ViewExams() {
       
       if (!res.ok) {
         const payload = await res.json();
-        throw new Error(payload.message || "فشل التحديث");
+        throw new Error(payload.message || "Update failed");
       }
       
       setNotes((prev) =>
@@ -228,7 +219,7 @@ export default function ViewExams() {
     try {
       await loadData();
     } catch (err) {
-      console.error("❌ فشل في إعادة التحميل:", err.message);
+      console.error("❌ Failed to reload:", err.message);
     } finally {
       setReloading(false);
     }
@@ -265,11 +256,11 @@ export default function ViewExams() {
               /> 
             </svg> 
             <Typography sx={{ fontWeight: "bold", color: "grey.800", fontSize:{xs:"17px",md:"22px",lg:"25px"}}} > 
-              إدارة الامتحانات النظرية
+              Management of theoretical examinations
             </Typography> 
           </Box>
 
-          <Tooltip title="إعادة تحميل">
+          <Tooltip title="Reload">
             <IconButton
               size="small"
               color="primary"
@@ -283,7 +274,7 @@ export default function ViewExams() {
 
         <StyledPaper>
           <Typography variant="h6" mb={2}>
-            قائمة الملاحظات حسب الطالب
+            List of notes by student
           </Typography>
 
           {error && (
@@ -302,7 +293,7 @@ export default function ViewExams() {
             flexWrap: 'wrap'
           }}>
             <TextField
-              placeholder="ابحث عن طلاب أو مواد أو عناوين..."
+              placeholder="Search for students, subjects, or titles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               sx={{ width: { xs: "100%", sm: 300 } }}
@@ -339,14 +330,14 @@ export default function ViewExams() {
             />
             
             <FormControl sx={{ minWidth: 180, width: { xs: "100%", sm: "auto" } }}>
-              <InputLabel>اختر الطالب</InputLabel>
+              <InputLabel>The student chose.</InputLabel>
               <Select
                 value={selectedStudent}
-                label="اختر الطالب"
+                label="The student chose"
                 onChange={(e) => setSelectedStudent(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل الطلاب</MenuItem>
+                <MenuItem value="">All the students</MenuItem>
                 {uniqueStudents.map((stu) => (
                   <MenuItem key={stu.id} value={stu.id}>
                     {stu.name}
@@ -356,14 +347,14 @@ export default function ViewExams() {
             </FormControl>
 
             <FormControl sx={{ minWidth: 180, width: { xs: "100%", sm: "auto" } }}>
-              <InputLabel>اختر المادة</InputLabel>
+              <InputLabel>Choose the subject</InputLabel>
               <Select
                 value={selectedSubject}
-                label="اختر المادة"
+                label="Choose the subject"
                 onChange={(e) => setSelectedSubject(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل المواد</MenuItem>
+                <MenuItem value="">All materials</MenuItem>
                 {subjectOptions.map((subject) => (
                   <MenuItem key={subject} value={subject}>{subject}</MenuItem>
                 ))}
@@ -371,14 +362,14 @@ export default function ViewExams() {
             </FormControl>
 
             <FormControl sx={{ minWidth: 180, width: { xs: "100%", sm: "auto" } }}>
-              <InputLabel>القسم</InputLabel>
+              <InputLabel>The section</InputLabel>
               <Select
                 value={sectionFilter}
-                label="القسم"
+                label="The section"
                 onChange={(e) => setSectionFilter(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل الأقسام</MenuItem>
+                <MenuItem value="">All sections</MenuItem>
                 {uniqueSections.map((section, index) => (
                   <MenuItem key={index} value={section}>{section}</MenuItem>
                 ))}
@@ -390,7 +381,7 @@ export default function ViewExams() {
             <Table>
               <TableHead sx={{ backgroundColor: "grey.50" }}>
                 <TableRow>
-                  {["الطالب", "القسم", "العنوان", "المادة", "التاريخ", "العلامة", "الإجراءات"].map((header, i) => (
+                  {["Student", "Department", "Title", "Subject", "Date", "Grade", "Actions"].map((header, i) => (
                     <TableCell
                       key={i}
                       sx={{
@@ -445,7 +436,7 @@ export default function ViewExams() {
           {filteredNotes.length === 0 && !loading && (
             <Box sx={{ textAlign: "center", py: 4 }}>
               <Typography variant="body1" color="grey.500">
-                لا توجد نتائج مطابقة للبحث
+                No matching results for the search.
               </Typography>
             </Box>
           )}
@@ -453,7 +444,7 @@ export default function ViewExams() {
 
         {/* مودال التعديل */}
         <Dialog open={editOpen} onClose={handleEditCancel} fullWidth maxWidth="sm">
-          <DialogTitle>تعديل ملاحظة للطالب: {editData.name}</DialogTitle>
+          <DialogTitle>Adjust a note for the student: {editData.name}</DialogTitle>
           <DialogContent dividers>
             {editError && (
               <Typography color="error" sx={{ mb: 2 }}>
@@ -462,7 +453,7 @@ export default function ViewExams() {
             )}
             <TextField
               fullWidth
-              label="عنوان الملاحظة"
+              label="Note title"
               name="sabject_title"
               value={editData.sabject_title}
               onChange={handleEditChange}
@@ -471,7 +462,7 @@ export default function ViewExams() {
               sx={{ mb: 2 }}
             />
             <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>اختر المادة</InputLabel>
+              <InputLabel>Choose the subject</InputLabel>
               <Select
                 name="sabject_name"
                 value={editData.sabject_name}
@@ -491,7 +482,7 @@ export default function ViewExams() {
             <TextField
               fullWidth
               type="date"
-              label="التاريخ"
+              label="date"
               name="sabject_date"
               value={editData.sabject_date}
               onChange={handleEditChange}
@@ -503,7 +494,7 @@ export default function ViewExams() {
             <TextField
               fullWidth
               type="number"
-              label="العلامة"
+              label="grade"
               name="sabject_grade"
               value={editData.sabject_grade}
               onChange={handleEditChange}
@@ -513,14 +504,14 @@ export default function ViewExams() {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleEditCancel} disabled={editSubmitting}>
-              إلغاء
+              Cancellation
             </Button>
             <Button
               variant="contained"
               onClick={handleEditSave}
               disabled={editSubmitting}
             >
-              {editSubmitting ? "جارٍ الحفظ..." : "حفظ التعديلات"}
+              {editSubmitting ? "Saveing..." : "Save"}
             </Button>
           </DialogActions>
         </Dialog>

@@ -128,7 +128,7 @@ if (!res.ok) throw new Error("فشل الحذف");
 setQuiz((prev) => prev.filter((n) => n.id !== id));
     } catch (err) { 
       console.error(err); 
-      alert("حدث خطأ أثناء الحذف"); 
+      alert("An error occurred while deleting."); 
     } 
   };
 
@@ -157,10 +157,10 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
   // تحقق قبل الحفظ
   const validateEdit = () => { 
     const errs = {}; 
-    if (!editData.quiz_title.trim()) errs.quiz_title = "العنوان مطلوب"; 
-    if (!editData.quiz_name) errs.quiz_name = "اختر المادة"; 
-    if (!editData.quiz_date) errs.quiz_date = "التاريخ مطلوب"; 
-    if (!editData.quiz_grade.toString().trim()) errs.quiz_grade = "العلامة مطلوبة"; 
+    if (!editData.quiz_title.trim()) errs.quiz_title = "The title is required."; 
+    if (!editData.quiz_name) errs.quiz_name = "Choose the subject"; 
+    if (!editData.quiz_date) errs.quiz_date = "History is required."; 
+    if (!editData.quiz_grade.toString().trim()) errs.quiz_grade = "The mark is required."; 
     setEditErrors(errs); 
     return Object.keys(errs).length === 0; 
   };
@@ -185,7 +185,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
       
       if (!res.ok) {
         const payload = await res.json();
-        throw new Error(payload.message || "فشل التحديث");
+        throw new Error(payload.message || "Update failed");
       }
       
       setQuiz((prev) =>
@@ -233,7 +233,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
     try {
       await loadData();
     } catch (err) {
-      console.error("❌ فشل في إعادة التحميل:", err.message);
+      console.error("Failed to reload:", err.message);
     } finally {
       setReloading(false);
     }
@@ -270,11 +270,11 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
               /> 
             </svg> 
             <Typography sx={{ fontWeight: "bold", color: "grey.800", fontSize:{xs:"17px",md:"22px",lg:"25px"}}} > 
-              إدارة الاختبارات العملية
+             Practical Testing Administration
             </Typography> 
           </Box>
 
-          <Tooltip title="إعادة تحميل">
+          <Tooltip title="Relaod">
             <IconButton
               size="small"
               color="primary"
@@ -288,7 +288,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
 
         <StyledPaper>
           <Typography variant="h6" mb={2}>
-            قائمة الملاحظات حسب الطالب
+            List of notes by student
           </Typography>
 
           {error && (
@@ -307,7 +307,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
             flexWrap: 'wrap'
           }}>
             <TextField
-              placeholder="ابحث عن طلاب أو مواد أو عناوين..."
+              placeholder="Search for students, subjects, or titles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               sx={{ width: { xs: "100%", sm: 300 } }}
@@ -344,12 +344,12 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
             />
             
             <FormControl fullWidth>
-  <InputLabel>اختر المادة العملية</InputLabel>
+  <InputLabel>Choose the practical subject</InputLabel>
   <Select
     value={selectedSubject}
     onChange={(e) => setSelectedSubject(e.target.value)}
   >
-    <MenuItem value="">الكل</MenuItem>
+    <MenuItem value="">All</MenuItem>
     {subjectOptions.map((subj) => (
       <MenuItem key={subj} value={subj}>
         {subj}
@@ -359,14 +359,14 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
 </FormControl>
 
 <FormControl sx={{ minWidth: 180, width: { xs: "100%", sm: "auto" } }}>
-              <InputLabel>اختر اختصاص الطالب</InputLabel>
+              <InputLabel>Choose the student's specialization</InputLabel>
               <Select
                 value={specializationFilter}
-                label="اختصاص"
+                label="specialization"
                 onChange={(e) => setSpecializationFilter(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل الأقسام</MenuItem>
+                <MenuItem value="">All sections</MenuItem>
                 {uniquespecialization.map((specialization, index) => (
                   <MenuItem key={index} value={specialization}>{specialization}</MenuItem>
                 ))}
@@ -374,14 +374,14 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
             </FormControl>
 
             <FormControl sx={{ minWidth: 180, width: { xs: "100%", sm: "auto" } }}>
-              <InputLabel>القسم</InputLabel>
+              <InputLabel>The section</InputLabel>
               <Select
                 value={sectionFilter}
-                label="القسم"
+                label="The section"
                 onChange={(e) => setSectionFilter(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل الأقسام</MenuItem>
+                <MenuItem value="">All sections</MenuItem>
                 {uniqueSections.map((section, index) => (
                   <MenuItem key={index} value={section}>{section}</MenuItem>
                 ))}
@@ -393,7 +393,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
             <Table>
               <TableHead sx={{ backgroundColor: "grey.50" }}>
               <TableRow>
-  {["الطالب", "القسم", "اختصاص الطالب", "العنوان", "المادة", "التاريخ", "العلامة", "الإجراءات"].map((header, i) => (
+  {["Student", "Department", "Student's Specialization", "Title", "Subject", "Date", "Grade", "Procedures"].map((header, i) => (
     <TableCell
       key={i}
       sx={{
@@ -415,8 +415,8 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
                   return (
                     <TableRow key={quiz.id} hover>
   <TableCell sx={{ textAlign: "right" }}>{student?.name || quiz.student_id}</TableCell>
-  <TableCell sx={{ textAlign: "right" }}>{student?.section || "غير محدد"}</TableCell>
-  <TableCell sx={{ textAlign: "right" }}>{student?.specialization || "غير محدد"}</TableCell> {/* ← الجديد */}
+  <TableCell sx={{ textAlign: "right" }}>{student?.section || "Unspecified"}</TableCell>
+  <TableCell sx={{ textAlign: "right" }}>{student?.specialization || "Unspecified"}</TableCell> {/* ← الجديد */}
   <TableCell sx={{ textAlign: "right" }}>{quiz.quiz_title}</TableCell>
   <TableCell sx={{ textAlign: "right" }}>{quiz.quiz_name}</TableCell>
   <TableCell sx={{ textAlign: "right" }}>{quiz.quiz_date}</TableCell>
@@ -449,7 +449,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
           {filteredQuiz.length === 0 && !loading && (
             <Box sx={{ textAlign: "center", py: 4 }}>
               <Typography variant="body1" color="grey.500">
-                لا توجد نتائج مطابقة للبحث
+                No matching results found for the search.
               </Typography>
             </Box>
           )}
@@ -457,7 +457,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
 
         {/* مودال التعديل */}
         <Dialog open={editOpen} onClose={handleEditCancel} fullWidth maxWidth="sm">
-  <DialogTitle>تعديل ملاحظة للطالب: {editData.name}</DialogTitle>
+  <DialogTitle>Edit a note for the student: {editData.name}</DialogTitle>
   <DialogContent dividers>
     {editError && (
       <Typography color="error" sx={{ mb: 2 }}>
@@ -467,7 +467,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
 
     <TextField
       fullWidth
-      label="عنوان الملاحظة"
+      label="Note title"
       name="quiz_title"
       value={editData.quiz_title}
       onChange={handleEditChange}
@@ -477,7 +477,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
     />
 
     <FormControl fullWidth error={!!editErrors.quiz_name} sx={{ mb: 2 }}>
-      <InputLabel>المادة العملية</InputLabel>
+      <InputLabel>The practical material</InputLabel>
       <Select
         name="quiz_name"
         value={editData.quiz_name}
@@ -497,7 +497,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
     <TextField
       fullWidth
       type="date"
-      label="التاريخ"
+      label="date"
       name="quiz_date"
       value={editData.quiz_date}
       onChange={handleEditChange}
@@ -510,7 +510,7 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
     <TextField
       fullWidth
       type="number"
-      label="العلامة"
+      label="grade"
       name="quiz_grade"
       value={editData.quiz_grade}
       onChange={handleEditChange}
@@ -521,14 +521,14 @@ setQuiz((prev) => prev.filter((n) => n.id !== id));
 
   <DialogActions>
     <Button onClick={handleEditCancel} disabled={editSubmitting}>
-      إلغاء
+      Close
     </Button>
     <Button
       variant="contained"
       onClick={handleEditSave}
       disabled={editSubmitting}
     >
-      {editSubmitting ? "جارٍ الحفظ..." : "حفظ التعديلات"}
+      {editSubmitting ? "Saveing..." : "Save changes"}
     </Button>
   </DialogActions>
 </Dialog>

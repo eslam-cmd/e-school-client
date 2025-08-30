@@ -211,11 +211,11 @@ export default function DashboardAdmin() {
   };
 
   const tabs = [
-    { id: "Students", label: "الطلاب", icon: <FiUsers /> },
-    { id: "Quizzes", label: "الاختبارات", icon: <FiBookOpen /> },
-    { id: "Exams", label: "المذاكرات", icon: <FiClipboard /> },
-    { id: "Attendance", label: "التفقد", icon: <FiCalendar /> },
-    { id: "Settings", label: "الإعدادات", icon: <FiSettings /> },
+    { id: "Students", label: "Students", icon: <FiUsers /> },
+    { id: "Quizzes", label: "Quizzes", icon: <FiBookOpen /> },
+    { id: "Exams", label: "Notes", icon: <FiClipboard /> },
+    { id: "Attendance", label: "Attendance", icon: <FiCalendar /> },
+    { id: "Settings", label: "Settings", icon: <FiSettings /> },
   ];
 
   const handleLogout = () => {
@@ -241,7 +241,7 @@ export default function DashboardAdmin() {
             <Accordion defaultExpanded sx={{ mb: 2 }}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="subtitle1" fontWeight="bold">
-                  إضافة طالب
+                  Add Students
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -251,7 +251,7 @@ export default function DashboardAdmin() {
             <Accordion sx={{ mb: 2 }}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="subtitle1" fontWeight="bold">
-                  عرض الطلاب
+                  View Students
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -274,10 +274,10 @@ export default function DashboardAdmin() {
                     '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }
                   }}
                 >
-                  <Tab label="إضافة اختبار نظري" />
-                  <Tab label="إضافة اختبار عملي" />
-                  <Tab label="عرض الاختبارات النظرية" />
-                  <Tab label="عرض الاختبارات العملية" />
+                  <Tab label="Add a theoretical exam" />
+                  <Tab label="Add a practical test" />
+                  <Tab label="Presentation of theoretical tests" />
+                  <Tab label="Presentation of practical tests" />
                 </Tabs>
     
                 {quizTab === 0 && <AddQuizzis />}
@@ -301,10 +301,10 @@ export default function DashboardAdmin() {
                     '& .MuiTabs-flexContainer': { flexWrap: 'nowrap' }
                   }}
                 >
-                  <Tab label="إضافة مذاكرة نظرية" />
-                  <Tab label="إضافة مذاكرة عملية" />
-                  <Tab label="عرض المذاكرات النظرية" />
-                  <Tab label="عرض المذاكرات العملية" />
+                  <Tab label="Adding theoretical study" />
+                  <Tab label="Adding practical study" />
+                  <Tab label="Presentation of theoretical notes" />
+                  <Tab label="Presentation of practical notes" />
                 </Tabs>
     
                 {examTab === 0 && <AddExams />}
@@ -321,7 +321,7 @@ export default function DashboardAdmin() {
             <Accordion defaultExpanded sx={{ mb: 2 }}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="subtitle1" fontWeight="bold">
-                  إضافة تفقد
+                  Add Attendance
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -331,7 +331,7 @@ export default function DashboardAdmin() {
             <Accordion sx={{ mb: 2 }}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="subtitle1" fontWeight="bold">
-                  عرض التفقد
+                  View Attendance
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -377,7 +377,7 @@ export default function DashboardAdmin() {
            {name}
             </Typography>
             <Typography variant="body2" color="text.secondary" noWrap>
-              مدير النظام
+              System Administrator
             </Typography>
           </Box>
         )}
@@ -432,7 +432,7 @@ export default function DashboardAdmin() {
           >
             <FiLogOut />
           </ListItemIcon>
-          {(!sidebarCollapsed || isMobile) && <ListItemText primary="تسجيل الخروج" />}
+          {(!sidebarCollapsed || isMobile) && <ListItemText primary="Logout" />}
         </NavButton>
       </ListItem>
 
@@ -446,7 +446,7 @@ export default function DashboardAdmin() {
           }}
         >
           <Typography variant="caption" sx={{ color: "primary.main", fontWeight: 500 }}>
-          <BrushIcon style={{ fontSize: "10px" }} /> تمت برمجة الموقع بواسطة إسلام هدايا
+          <BrushIcon style={{ fontSize: "10px" }} /> The website was programmed by Islam Hadaya.
         </Typography>
         </Box>
       )}
@@ -483,7 +483,7 @@ export default function DashboardAdmin() {
             <FiMenu />
           </IconButton>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, fontSize: { xs: '1rem', sm: '1.25rem' } }}>
-            {tabs.find(t => t.id === activeTab)?.label || "لوحة التحكم"}
+            {tabs.find(t => t.id === activeTab)?.label || "Control Panel"}
           </Typography>
         </Toolbar>
       </AppBar>

@@ -60,13 +60,13 @@ const AddStudents = () => {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) throw new Error("فشل في الإرسال");
+      if (!response.ok) throw new Error("Failed to send");
 
       const result = await response.json();
       setModal({
         open: true,
         success: true,
-        message: "✅ تم إضافة المذاكرة بنجاح",
+        message: "✅ The studying has been added successfully.",
       });
 
       setFormData({
@@ -81,13 +81,13 @@ const AddStudents = () => {
       // إعادة التوجيه بعد الإضافة
       // router.push("/students"); ← إذا عندك صفحة عرض الطلاب
     } catch (err) {
-      console.error("❌ خطأ في السيرفر:", err.message);
+      console.error("❌ Server error:", err.message);
       setModal({
         open: true,
         success: false,
-        message: "❌ حدث خطأ أثناء الاضافة",
+        message: "❌ An error occurred during the addition.",
       });
-      res.status(500).json({ error: "حدث خطأ أثناء الحفظ" });
+      res.status(500).json({ error: "An error occurred while saving." });
     }
      finally {
       setLoading(false);
@@ -98,25 +98,25 @@ const AddStudents = () => {
     <>
     <FormContainer>
       <Typography sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}} fontWeight={600} mb={2} color="#1f2937">
-        إضافة طالب جديد
+        Add a new student
       </Typography>
 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            label="الاسم الكامل"
+            label="FullName"
             name="name"
             value={formData.name}
             onChange={handleChange}
             variant="outlined"
-            placeholder="أدخل اسم الطالب"
+            placeholder="Enter the student's name"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            label="رقم ولي الامر"
+            label="Guardian's number"
             name="guardianNum"
             value={formData.guardianNum}
             onChange={handleChange}
@@ -129,42 +129,42 @@ const AddStudents = () => {
         </Grid><Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            label="اسم المدرسة"
+            label="Name school"
             name="nameSchool"
             value={formData.nameSchool}
             onChange={handleChange}
             variant="outlined"
-            placeholder="أدخل اسم المدرسة"
+            placeholder="Enter the name of the school"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            label="الشعبة"
+            label="section"
             name="section"
             value={formData.section}
             onChange={handleChange}
             variant="outlined"
-            placeholder="مثلا: الشعبة الاولى"
+            placeholder="For example: the first section"
           />
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            label="التخصص"
+            label="specialization"
             name="specialization"
             value={formData.specialization}
             onChange={handleChange}
             variant="outlined"
-            placeholder="مثلا: صناعة الكترون"
+            placeholder="For example: electronics industry"
           />
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <TextField
             fullWidth
-            label="رقم الهاتف"
+            label="Phone number"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
@@ -192,7 +192,7 @@ const AddStudents = () => {
               "&:hover": { backgroundColor: "#1d4ed8" },
             }}
           >
-            {loading ? "⏳ جاري الحفظ..." : "حفظ الطالب"}
+            {loading ? "⏳ Saveing..." : "Save"}
           </Button>
         </Grid>
       </Grid>
@@ -219,7 +219,7 @@ const AddStudents = () => {
           fontSize:"25px"
         }}
       >
-        {modal.success ? "نجاح العملية" : "فشل العملية"}
+        {modal.success ? "The success of the operation" : "The operation failed."}
       </Typography>
     </DialogTitle>
     <DialogContent>
@@ -238,7 +238,7 @@ const AddStudents = () => {
           },
         }}
       >
-        إغلاق
+        Closing
       </Button>
     </DialogActions>
   </Dialog>

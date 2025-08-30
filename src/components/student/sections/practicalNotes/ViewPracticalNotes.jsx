@@ -87,7 +87,7 @@ export default function ViewPrecticalNotes() {
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Typography fontWeight={700} color="text.primary" sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}}>
         <FiClipboard style={{color:"#2A52BE"}}/>
-          سجل المذاكرات العملية
+          Record of practical notes
         </Typography>
         <IconButton
           onClick={async () => setNotes(await fetchNotes())}
@@ -107,10 +107,10 @@ export default function ViewPrecticalNotes() {
           height={200}
         >
           <CircularProgress />
-          <Typography mt={1}>جاري التحميل...</Typography>
+          <Typography mt={1}>Loading...</Typography>
         </Box>
       ) : notes.length === 0 ? (
-        <Typography align="center">لا توجد جلسات مذاكرة</Typography>
+        <Typography align="center">There are no study sessions.</Typography>
       ) : (
         Object.entries(groupedByMonth).map(([monthYear, entries]) => (
           <Box key={monthYear} mb={4}>
@@ -121,11 +121,11 @@ export default function ViewPrecticalNotes() {
               <Table stickyHeader>
                 <TableHead>
                   <TableRow>
-                    <HeaderCell>اليوم</HeaderCell>
-                    <HeaderCell>التاريخ</HeaderCell>
-                    <HeaderCell>عنوان المذاكرة</HeaderCell>
-                    <HeaderCell>المادة</HeaderCell>
-                    <HeaderCell>الدرجة</HeaderCell>
+                    <HeaderCell>Today</HeaderCell>
+                    <HeaderCell>Date</HeaderCell>
+                    <HeaderCell>Subject title</HeaderCell>
+                    <HeaderCell>Subject</HeaderCell>
+                    <HeaderCell>Mark</HeaderCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

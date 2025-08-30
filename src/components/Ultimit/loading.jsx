@@ -4,7 +4,6 @@ import SchoolIcon from "@mui/icons-material/School";
 export default function LoadingScreen() {
   return (
     <Box
-      dir="rtl"
       sx={{
         backgroundColor: "#115293",
         color: "white",
@@ -19,7 +18,7 @@ export default function LoadingScreen() {
       <SchoolIcon sx={{ fontSize: 80, color: "white" }} />
       <CircularProgress color="inherit" thickness={5} />
       <Typography variant="h6" sx={{ opacity: 0.9 }}>
-        جاري تحميل بوابة المعهد...
+        Loading...
       </Typography>
     </Box>
   );

@@ -103,7 +103,7 @@ export default function ViewPracticalNotes() {
       setNotes(notesWithNames);
     } catch (err) { 
       console.error(err);
-      setError("فشل في تحميل البيانات. تأكد من اتصال الخادم.");
+      setError("Failed to load data. Please check the server connection..");
     } finally { 
       setLoading(false); 
     } 
@@ -116,18 +116,18 @@ export default function ViewPracticalNotes() {
     fetch(`${API_URL}/api/practical-notes/subjects`)
       .then(res => res.json())
       .then(data => setSubjectOptions(data.subjects))
-      .catch(err => console.error("فشل جلب المواد العملية:", err));
+      .catch(err => console.error("Failed to bring the practical materials:", err));
   }, []);
   // حذف ملاحظة
   const handleDelete = async (id) => { 
-    if (!confirm("هل أنت متأكد من الحذف نهائيًا؟")) return; 
+    if (!confirm("Are you sure you want to delete it permanently?")) return; 
     try { 
       const res = await fetch(`${API_URL}/api/sabject/${id}`, { method: "DELETE" }); 
       if (!res.ok) throw new Error("فشل الحذف"); 
       setNotes((prev) => prev.filter((n) => n.id !== id)); 
     } catch (err) { 
       console.error(err); 
-      alert("حدث خطأ أثناء الحذف"); 
+      alert("An error occurred while deleting."); 
     } 
   };
 
@@ -156,10 +156,10 @@ export default function ViewPracticalNotes() {
   // تحقق قبل الحفظ
   const validateEdit = () => { 
     const errs = {}; 
-    if (!editData.sabject_title.trim()) errs.sabject_title = "العنوان مطلوب"; 
-    if (!editData.sabject_name) errs.sabject_name = "اختر المادة"; 
-    if (!editData.sabject_date) errs.sabject_date = "التاريخ مطلوب"; 
-    if (!editData.sabject_grade.toString().trim()) errs.sabject_grade = "العلامة مطلوبة"; 
+    if (!editData.sabject_title.trim()) errs.sabject_title = "The title is required."; 
+    if (!editData.sabject_name) errs.sabject_name = "Choose the subject"; 
+    if (!editData.sabject_date) errs.sabject_date = "History is required."; 
+    if (!editData.sabject_grade.toString().trim()) errs.sabject_grade = "The mark is required."; 
     setEditErrors(errs); 
     return Object.keys(errs).length === 0; 
   };
@@ -184,7 +184,7 @@ export default function ViewPracticalNotes() {
       
       if (!res.ok) {
         const payload = await res.json();
-        throw new Error(payload.message || "فشل التحديث");
+        throw new Error(payload.message || "Update failed");
       }
       
       setNotes((prev) =>
@@ -232,7 +232,7 @@ export default function ViewPracticalNotes() {
     try {
       await loadData();
     } catch (err) {
-      console.error("❌ فشل في إعادة التحميل:", err.message);
+      console.error("❌ Failed to reload:", err.message);
     } finally {
       setReloading(false);
     }
@@ -269,11 +269,11 @@ export default function ViewPracticalNotes() {
               /> 
             </svg> 
             <Typography  sx={{ fontWeight: "bold", color: "grey.800" ,fontSize:{xs:"17px",md:"22px",lg:"25px"}}} > 
-              إدارة الامتحانات العملية
+              Practical Examination Administration
             </Typography> 
           </Box>
 
-          <Tooltip title="إعادة تحميل">
+          <Tooltip title="Reload">
             <IconButton
               size="small"
               color="primary"
@@ -287,7 +287,7 @@ export default function ViewPracticalNotes() {
 
         <StyledPaper>
           <Typography variant="h6" mb={2}>
-            قائمة الملاحظات حسب الطالب
+            List of notes by student
           </Typography>
 
           {error && (
@@ -306,7 +306,7 @@ export default function ViewPracticalNotes() {
             flexWrap: 'wrap'
           }}>
             <TextField
-              placeholder="ابحث عن طلاب أو مواد أو عناوين..."
+              placeholder="Search for students, subjects, or titles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               sx={{ width: { xs: "100%", sm: 300 } }}
@@ -343,12 +343,12 @@ export default function ViewPracticalNotes() {
             />
             
             <FormControl fullWidth>
-  <InputLabel>اختر المادة العملية</InputLabel>
+  <InputLabel>Choose the practical subject </InputLabel>
   <Select
     value={selectedSubject}
     onChange={(e) => setSelectedSubject(e.target.value)}
   >
-    <MenuItem value="">الكل</MenuItem>
+    <MenuItem value="">All</MenuItem>
     {subjectOptions.map((subj) => (
       <MenuItem key={subj} value={subj}>
         {subj}
@@ -358,14 +358,14 @@ export default function ViewPracticalNotes() {
 </FormControl>
 
 <FormControl sx={{ minWidth: 180, width: { xs: "100%", sm: "auto" } }}>
-              <InputLabel>اختر اختصاص الطالب</InputLabel>
+              <InputLabel>Choose the student's specialization</InputLabel>
               <Select
                 value={specializationFilter}
-                label="اختصاص"
+                label="specialization"
                 onChange={(e) => setSpecializationFilter(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل الأقسام</MenuItem>
+                <MenuItem value="">All sections</MenuItem>
                 {uniquespecialization.map((specialization, index) => (
                   <MenuItem key={index} value={specialization}>{specialization}</MenuItem>
                 ))}
@@ -373,14 +373,14 @@ export default function ViewPracticalNotes() {
             </FormControl>
 
             <FormControl sx={{ minWidth: 180, width: { xs: "100%", sm: "auto" } }}>
-              <InputLabel>القسم</InputLabel>
+              <InputLabel>The section</InputLabel>
               <Select
                 value={sectionFilter}
-                label="القسم"
+                label="The section"
                 onChange={(e) => setSectionFilter(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل الأقسام</MenuItem>
+                <MenuItem value="">All sections</MenuItem>
                 {uniqueSections.map((section, index) => (
                   <MenuItem key={index} value={section}>{section}</MenuItem>
                 ))}
@@ -465,7 +465,7 @@ export default function ViewPracticalNotes() {
             )}
             <TextField
               fullWidth
-              label="عنوان الملاحظة"
+              label="Note title"
               name="sabject_title"
               value={editData.sabject_title}
               onChange={handleEditChange}
@@ -475,7 +475,7 @@ export default function ViewPracticalNotes() {
             />
        
 <FormControl fullWidth error={!!editErrors.sabject_name}>
-  <InputLabel>المادة العملية</InputLabel>
+  <InputLabel>The practical material</InputLabel>
   <Select
     name="sabject_name"
     value={editData.sabject_name}

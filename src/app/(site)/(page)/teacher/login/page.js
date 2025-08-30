@@ -1,10 +1,10 @@
 import TeacherLoginPage from "@/components/auth/login-tetcher/login";
 export const metadata = {
-    title: "تسجيل الدخول للاستاذ",
-    description: "منصة تعليمية متكاملة لإدارة الطلاب والدروس",
+    title: "Login for the teacher",
+    description: "An integrated educational platform for managing students and lessons.",
     openGraph: {
-      title: "E-School | لوحة التحكم",
-      description: "منصة تعليمية متكاملة لإدارة الطلاب والدروس",
+      title: "E-School | Control Panel",
+      description: "An integrated educational platform for managing students and lessons.",
       url: "https://e-school-client.vercel.app",
       siteName: "E-School",
       images: [

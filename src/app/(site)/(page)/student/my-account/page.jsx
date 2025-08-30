@@ -1,11 +1,11 @@
 import DashboardStudent from "@/components/student/dashboard";
 
 export const metadata = {
-  title: "حسابي",
-  description: "منصة تعليمية متكاملة لإدارة الطلاب والدروس",
+  title: "My Account",
+  description: "An integrated educational platform for managing students and lessons.",
   openGraph: {
-    title: "E-School | لوحة التحكم",
-    description: "منصة تعليمية متكاملة لإدارة الطلاب والدروس",
+    title: "E-School | Control Panel",
+    description: "An integrated educational platform for managing students and lessons.",
     url: "https://e-school-client.vercel.app",
     siteName: "E-School",
     images: [

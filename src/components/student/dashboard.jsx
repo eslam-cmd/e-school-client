@@ -42,7 +42,7 @@ const SidebarContent = ({ tabs, activeTab, onTabClick, onLogout }) => {
             {name}
           </Typography>
           <Typography sx={{ color: "#fff" }} variant="body2" noWrap>
-            طالب {spec}
+            Specialization {spec}
           </Typography>
         </Box>
       </Box>
@@ -72,7 +72,7 @@ const SidebarContent = ({ tabs, activeTab, onTabClick, onLogout }) => {
             <ListItemIcon sx={{ color: "error.main" }}>
               <FiLogOut />
             </ListItemIcon>
-            <ListItemText primary="تسجيل الخروج" />
+            <ListItemText primary="Logout" />
           </ListItemButton>
         </ListItem>
       </List>
@@ -80,7 +80,7 @@ const SidebarContent = ({ tabs, activeTab, onTabClick, onLogout }) => {
       {/* Footer */}
       <Box sx={{ mt: 2, px: 2, py: 1, borderTop: 1, borderColor: "primary.main", textAlign: "center" }}>
         <Typography variant="caption" sx={{ color: "primary.main", fontWeight: 500 }}>
-          <BrushIcon style={{ fontSize: "10px" }} /> تمت برمجة الموقع بواسطة إسلام هدايا
+          <BrushIcon style={{ fontSize: "10px" }} /> The website was programmed by Islam Hadaya.
         </Typography>
       </Box>
     </Box>
@@ -100,9 +100,9 @@ export default function DashboardStudent() {
   const [examTab, setExamTab] = useState(0);
 
   const tabs = [
-    { id: "Quizzes", label: "الاختبارات", icon: <FiBookOpen /> },
-    { id: "Exams", label: "المذاكرات", icon: <FiClipboard /> },
-    { id: "Attendance", label: "التفقد", icon: <FiCalendar /> },
+    { id: "Quizzes", label: "Tasks", icon: <FiBookOpen /> },
+    { id: "Exams", label: "Notes", icon: <FiClipboard /> },
+    { id: "Attendance", label: "Attendance", icon: <FiCalendar /> },
   ];
 
 useEffect(() => {
@@ -137,8 +137,8 @@ useEffect(() => {
         return (
           <Box sx={{ width: '100%',marginTop:"30px" }}>
             <Tabs value={quizTab} onChange={(e, newValue) => setQuizTab(newValue)}>
-              <Tab label="عرض الاختبارات النظرية" />
-              <Tab label="عرض الاختبارات العملية" />
+              <Tab label="Presentation of theoretical tests" />
+              <Tab label="Presentation of practical tests" />
             </Tabs>
             {quizTab === 0 && <ViewQuizzes />}
             {quizTab === 1 && <ViewPracticalQuiz />}
@@ -149,8 +149,8 @@ useEffect(() => {
         return (
           <Box sx={{ width: '100%',marginTop:"30px"  }}>
             <Tabs value={examTab} onChange={(e, newValue) => setExamTab(newValue)}>
-              <Tab label="عرض المذاكرات النظرية" />
-              <Tab label="عرض المذاكرات العملية" />
+              <Tab label="Presentation of theoretical notes" />
+              <Tab label="Presentation of practical notes" />
             </Tabs>
             {examTab === 0 && <ViewExams />}
             {examTab === 1 && <ViewPracticalNotes />}
@@ -162,7 +162,7 @@ useEffect(() => {
           <>
               <AccordionSummary style={{marginTop:"30px" }}>
                 <Typography variant="subtitle1" fontWeight="bold">
-                  عرض التفقد
+                  Inspection display
                 </Typography>
               </AccordionSummary>
                 <ViewAttendance />
@@ -194,7 +194,7 @@ useEffect(() => {
           </Typography>
           <Breadcrumbs separator="›" sx={{ color: "inherit", display: { xs: "none", sm: "flex" } }}>
             <Link href="/" style={{ textDecoration: "none", fontSize: "20px", color: "#FAF0BE", fontWeight: "700" }}>
-              <HomeIcon /> العودة الى الصفحة الرئيسية
+              <HomeIcon /> Back to Home
             </Link>
           </Breadcrumbs>
         </Toolbar>

@@ -29,12 +29,12 @@ import {
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 const navItems = [
-  { label: "عن المعهد", href: "/about" },
+  { label: "About the institute", href: "/" },
 ];
 
 const whatsappNumbers = [
-  { label: "الاستاذ نور عرب", number: "+963957853948" },
-  { label: "الاستاذ كامل عرب", number: "+963966263995" },
+  { label: "Professor Ahmad Al-Ahmad", number: "+963932642429" },
+  { label: "Professor Islam hadaya", number: "+963932642429" },
 ];
 
 const Header = () => {
@@ -87,27 +87,30 @@ const Header = () => {
         }}
       >
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ justifyContent: "space-between", direction: "rtl" }}>
+          <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
             {/* شعار المعهد */}
-            <Box
-              component={Link}
-              href="/"
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                textDecoration: "none",
-              }}
-            >
-              <Box
-                component="img"
-                src="/logo2.jpg"
-                alt="شعار معهد الأوائل"
-                sx={{
-                  width: { xs: 30, md: 40, lg: 45 },
-                  height: "auto",
-                }}
-              />
-            </Box>
+           <Box
+  component={Link}
+  href="/"
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    textDecoration: "none",
+  }}
+>
+  <Typography
+    variant="subtitle1"
+    fontWeight={500}
+    sx={{
+      fontFamily: "'Orbitron', sans-serif",
+      letterSpacing: 1.5,
+      color: "#1976d2", // لون أنيق
+      textShadow: "0 1px 3px rgba(0,0,0,0.3)", // ظل خفيف
+    }}
+  >
+    Institute of the Future
+  </Typography>
+</Box>
             <IconButton
   onClick={() => setOpenDrawer(true)}
   sx={{ display: { xs: "inline-flex", md: "none" }, color: "white" }}
@@ -138,7 +141,7 @@ const Header = () => {
                   fontSize: { lg: "17px", md: "15px", xs: "13px" },
                 }}
               >
-                اتصل بنا
+                Contact Us
               </Button>
             </Box>
 
@@ -164,7 +167,7 @@ const Header = () => {
                     fontSize: { lg: "17px", md: "15px", xs: "13px" },
                   }}
                 >
-                  دخول الطالب
+                  Student entry
                 </Button>
               )}
             </Stack>
@@ -176,7 +179,7 @@ const Header = () => {
       <Dialog open={openModal} onClose={() => setOpenModal(false)} maxWidth="xs" fullWidth>
   <DialogTitle sx={{ textAlign: "center", fontWeight: "bold", pt: 3 }}>
     <WhatsAppIcon sx={{ fontSize: 40, color: "#25D366", mb: 1 }} />
-    <Typography  fontWeight={700}>تواصل معنا عبر واتساب</Typography>
+    <Typography  fontWeight={700}>Contact us via WhatsApp</Typography>
   </DialogTitle>
 
   <Divider sx={{ mx: 4, my: 1 }} />
@@ -225,9 +228,9 @@ const Header = () => {
   open={openDrawer}
   onClose={() => setOpenDrawer(false)}
 >
-  <Box sx={{ width: 250, p: 2, direction: "rtl" }}>
+  <Box sx={{ width: 250, p: 2 }}>
     <Typography variant="h6" fontWeight={700} textAlign="center" mb={2}>
-      القائمة
+      Menu
     </Typography>
     <Divider />
     <List>
@@ -249,7 +252,7 @@ const Header = () => {
             setOpenModal(true);
           }}
         >
-          <ListItemText primary="اتصل بنا" sx={{ textAlign: "right" }} />
+          <ListItemText primary="Contact Us" sx={{ textAlign: "right" }} />
         </ListItemButton>
       </ListItem>
     </List>

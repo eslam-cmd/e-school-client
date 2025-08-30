@@ -68,12 +68,12 @@ export default function ViewQuizzes() {
 
   // قائمة المواد
   const subjectOptions = [
-    "الرياضيات",
-    "الفيزياء",
-    "الكيمياء",
-    "اللغة العربية",
-    "اللغة الإنجليزية",
-    "الديانة",
+    "Mathematics",
+    "Physics",
+    "Chemistry",
+    "Arabic Language",
+    "English Language",
+    "Religion",
   ];
 
   // load quizzes & students
@@ -97,7 +97,7 @@ export default function ViewQuizzes() {
         setQuizzes(Array.isArray(quizData) ? quizData : quizData.data);
       } catch (err) {
         console.error("Load data error:", err);
-        setError("فشل في جلب البيانات. تأكد من أن الخادم يعمل.");
+        setError("Failed to fetch the data. Make sure the server is running.");
       } finally {
         setLoading(false);
       }
@@ -137,11 +137,11 @@ export default function ViewQuizzes() {
   // validate before PUT
   const validateEdit = () => {
     const errs = {};
-    if (!editData.student_id) errs.student_id = "اختر الطالب";
-    if (!editData.quiz_title.trim()) errs.quiz_title = "العنوان مطلوب";
-    if (!editData.quiz_name) errs.quiz_name = "اختر المادة";
-    if (!editData.quiz_date) errs.quiz_date = "التاريخ مطلوب";
-    if (!editData.quiz_grade.trim()) errs.quiz_grade = "الدرجة مطلوبة";
+    if (!editData.student_id) errs.student_id = "The student chose.";
+    if (!editData.quiz_title.trim()) errs.quiz_title = "The title is required.";
+    if (!editData.quiz_name) errs.quiz_name = "Choose the subject";
+    if (!editData.quiz_date) errs.quiz_date = "History is required.";
+    if (!editData.quiz_grade.trim()) errs.quiz_grade = "The degree is required.";
     setEditErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -159,7 +159,7 @@ export default function ViewQuizzes() {
         body: JSON.stringify(editData),
       });
       const payload = await res.json();
-      if (!res.ok) throw new Error(payload.message || "خطأ غير معروف");
+      if (!res.ok) throw new Error(payload.message || "Unknown error");
 
       // update local list
       setQuizzes((prev) =>
@@ -168,14 +168,14 @@ export default function ViewQuizzes() {
       handleEditClose();
     } catch (err) {
       console.error("Edit quiz error:", err);
-      setEditError(`فشل التحديث: ${err.message}`);
+      setEditError(`Update failed: ${err.message}`);
     } finally {
       setEditSubmitting(false);
     }
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("هل أنت متأكد من حذف هذا الكويز؟")) return;
+    if (!window.confirm("Are you sure you want to delete this quiz?")) return;
     try {
       const res = await fetch(`${API_URL}/api/quiz/${id}`, {
         method: "DELETE",
@@ -184,7 +184,7 @@ export default function ViewQuizzes() {
       setQuizzes(prev => prev.filter(q => q.id !== id));
     } catch (err) {
       console.error("Delete quiz error:", err);
-      alert("خطأ أثناء حذف الكويز. حاول مجددًا.");
+      alert("Error while deleting the quiz. Please try again.");
     }
   };
 
@@ -229,8 +229,8 @@ export default function ViewQuizzes() {
         fetch(`${API_URL}/api/quiz`),
       ]);
       
-      if (!studRes.ok) throw new Error("فشل في جلب الطلاب");
-      if (!quizRes.ok) throw new Error("فشل في جلب الكويزات");
+      if (!studRes.ok) throw new Error("Failed to attract the students");
+      if (!quizRes.ok) throw new Error("Failed to fetch the quizzes.");
       
       const [studData, quizData] = await Promise.all([
         studRes.json(),
@@ -240,8 +240,8 @@ export default function ViewQuizzes() {
       setStudents(studData);
       setQuizzes(Array.isArray(quizData) ? quizData : quizData.data);
     } catch (err) {
-      console.error("❌ فشل في إعادة التحميل:", err.message);
-      setError("فشل في إعادة التحميل");
+      console.error("❌ Failed to reload:", err.message);
+      setError("Failed to reload");
     } finally {
       setReloading(false);
     }
@@ -278,11 +278,11 @@ export default function ViewQuizzes() {
             <Typography
               sx={{ fontWeight: "bold", color: "grey.800", fontSize:{xs:"17px",md:"22px",lg:"25px"}}}
             >
-              إدارة الكويزات النظرية
+              Management of theoretical quizzes
             </Typography>
           </Box>
 
-          <Tooltip title="إعادة تحميل">
+          <Tooltip title="Reload">
             <IconButton
               size="small"
               color="primary"
@@ -296,7 +296,7 @@ export default function ViewQuizzes() {
 
         <StyledPaper>
           <Typography variant="h6" mb={2}>
-            قائمة الكويزات حسب الطالب
+            List of quizzes by student
           </Typography>
 
           {error && (
@@ -314,7 +314,7 @@ export default function ViewQuizzes() {
             gap: 2 
           }}>
             <TextField
-              placeholder="ابحث عن طلاب أو مواد أو عناوين..."
+              placeholder="Search for students, subjects, or titles.."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               sx={{ width: { xs: "100%", sm: 300 } }}
@@ -351,14 +351,14 @@ export default function ViewQuizzes() {
             />
             
             <FormControl sx={{ minWidth: 180, width: { xs: "100%", sm: "auto" } }}>
-              <InputLabel>اختر الطالب</InputLabel>
+              <InputLabel>The student chose.</InputLabel>
               <Select
                 value={selectedStudent}
-                label="اختر الطالب"
+                label="The student chose"
                 onChange={(e) => setSelectedStudent(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل الطلاب</MenuItem>
+                <MenuItem value="">All the students</MenuItem>
                 {uniqueStudents.map((stu) => (
                   <MenuItem key={stu.id} value={stu.id}>
                     {stu.name}
@@ -368,14 +368,14 @@ export default function ViewQuizzes() {
             </FormControl>
 
             <FormControl sx={{ minWidth: 180, width: { xs: "100%", sm: "auto" } }}>
-              <InputLabel>اختر المادة</InputLabel>
+              <InputLabel>Choose the subject</InputLabel>
               <Select
                 value={selectedSubject}
-                label="اختر المادة"
+                label="Choose the subject"
                 onChange={(e) => setSelectedSubject(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل المواد</MenuItem>
+                <MenuItem value="">All materials</MenuItem>
                 {subjectOptions.map((subject) => (
                   <MenuItem key={subject} value={subject}>{subject}</MenuItem>
                 ))}
@@ -383,14 +383,14 @@ export default function ViewQuizzes() {
             </FormControl>
 
             <FormControl sx={{ minWidth: 180, width: { xs: "100%", sm: "auto" } }}>
-              <InputLabel>القسم</InputLabel>
+              <InputLabel>The section</InputLabel>
               <Select
                 value={sectionFilter}
-                label="القسم"
+                label="The section"
                 onChange={(e) => setSectionFilter(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل الأقسام</MenuItem>
+                <MenuItem value="">All sections</MenuItem>
                 {uniqueSections.map((section, index) => (
                   <MenuItem key={index} value={section}>{section}</MenuItem>
                 ))}
@@ -402,7 +402,7 @@ export default function ViewQuizzes() {
             <Table>
               <TableHead sx={{ backgroundColor: "grey.50" }}>
                 <TableRow>
-                  {["الطالب", "القسم", "العنوان", "المادة", "التاريخ", "العلامة", "الإجراءات"].map((header, i) => (
+                  {["student", "section", "title", "subject", "date", "grade", "actions"].map((header, i) => (
                     <TableCell
                       key={i}
                       sx={{
@@ -457,7 +457,7 @@ export default function ViewQuizzes() {
           {filteredQuizzes.length === 0 && !loading && (
             <Box sx={{ textAlign: "center", py: 4 }}>
               <Typography variant="body1" color="grey.500">
-                لا توجد نتائج مطابقة للبحث
+                No matching results found for the search.
               </Typography>
             </Box>
           )}
@@ -465,7 +465,7 @@ export default function ViewQuizzes() {
 
         {/* Edit Modal */}
         <Dialog open={editOpen} onClose={handleEditClose} maxWidth="sm" fullWidth>
-          <DialogTitle>تعديل الكويز</DialogTitle>
+          <DialogTitle>Edit the quiz</DialogTitle>
           <DialogContent dividers>
             {editError && (
               <Alert severity="error" sx={{ mb: 2 }}>
@@ -473,12 +473,12 @@ export default function ViewQuizzes() {
               </Alert>
             )}
             <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>اختر الطالب</InputLabel>
+              <InputLabel>The student chose.</InputLabel>
               <Select
                 name="student_id"
                 value={editData.student_id}
                 onChange={handleEditChange}
-                label="اختر الطالب"
+                label="The student chose"
                 error={!!editErrors.student_id}
               >
                 {students.map((s) => (
@@ -496,7 +496,7 @@ export default function ViewQuizzes() {
 
             <TextField
               fullWidth
-              label="العنوان"
+              label="title"
               name="quiz_title"
               value={editData.quiz_title}
               onChange={handleEditChange}
@@ -506,12 +506,12 @@ export default function ViewQuizzes() {
             />
 
             <FormControl fullWidth sx={{ mb: 2 }}>
-              <InputLabel>المادة</InputLabel>
+              <InputLabel>subject</InputLabel>
               <Select
                 name="quiz_name"
                 value={editData.quiz_name}
                 onChange={handleEditChange}
-                label="المادة"
+                label="Subject"
                 error={!!editErrors.quiz_name}
               >
                 {subjectOptions.map((subj) => (
@@ -530,7 +530,7 @@ export default function ViewQuizzes() {
             <TextField
               fullWidth
               type="date"
-              label="التاريخ"
+              label="date"
               name="quiz_date"
               value={editData.quiz_date}
               onChange={handleEditChange}
@@ -543,7 +543,7 @@ export default function ViewQuizzes() {
             <TextField
               fullWidth
               type="number"
-              label="العلامة"
+              label="grade"
               name="quiz_grade"
               value={editData.quiz_grade}
               onChange={handleEditChange}
@@ -554,7 +554,7 @@ export default function ViewQuizzes() {
 
           <DialogActions>
             <Button onClick={handleEditClose} disabled={editSubmitting}>
-              إلغاء
+              Close
             </Button>
             <Button
               variant="contained"
@@ -564,7 +564,7 @@ export default function ViewQuizzes() {
               {editSubmitting ? (
                 <CircularProgress size={20} color="inherit" />
               ) : (
-                "حفظ"
+                "Save"
               )}
             </Button>
           </DialogActions>

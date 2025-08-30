@@ -60,7 +60,7 @@ export default function AddAttendance() {
       })
       .catch((err) => {
         console.error(err);
-        setErrorStudents("فشل في تحميل قائمة الطلاب");
+        setErrorStudents("Failed to load the student list.");
       })
       .finally(() => setLoadingStudents(false));
   }, []);
@@ -84,10 +84,10 @@ export default function AddAttendance() {
           student_id: attendanceData.studentId,
           attendance_date: attendanceData.date,
           status:
-            attendanceData.status === "حاضر" ? "present" : "absent",
+            attendanceData.status === "present" ? "present" : "absent",
         }),
       });
-      if (!res.ok) throw new Error("خطأ في الخادم");
+      if (!res.ok) throw new Error("Server error");
 
       await res.json();
       setAttendanceData((prev) => ({
@@ -100,17 +100,17 @@ export default function AddAttendance() {
       setModal({
         open: true,
         success: true,
-        message: "✅ تم حفظ التفقد بنجاح",
+        message: "✅ The inspection has been successfully saved.",
       });
     } catch (err) {
       console.error(err);
-      setSubmitError("لم نتمكن من حفظ التفقد");
+      setSubmitError("We were unable to save the inspection.");
 
       // فتح المودال بفشل
       setModal({
         open: true,
         success: false,
-        message: "❌ حدث خطأ أثناء الحفظ",
+        message: "❌ An error occurred while saving.",
       });
     } finally {
       setSubmitting(false);
@@ -126,7 +126,7 @@ export default function AddAttendance() {
           color="#1f2937"
           sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}}
         >
-          تسجيل حالة الطالب
+          Student case registration
         </Typography>
 
         {errorStudents && (
@@ -140,7 +140,7 @@ export default function AddAttendance() {
             <TextField
               fullWidth
               select
-              label="اختر الطالب"
+              label="The student chose."
               name="studentId"
               value={attendanceData.studentId}
               onChange={handleChange}
@@ -167,7 +167,7 @@ export default function AddAttendance() {
             <TextField
               fullWidth
               type="date"
-              label="تاريخ التفقد"
+              label="Inspection date"
               name="date"
               value={attendanceData.date}
               onChange={handleChange}
@@ -180,7 +180,7 @@ export default function AddAttendance() {
             <TextField
               fullWidth
               select
-              label="الحالة"
+              label="State"
               name="status"
               value={attendanceData.status}
               onChange={handleChange}
@@ -189,38 +189,38 @@ export default function AddAttendance() {
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderColor:
-                      attendanceData.status === "حاضر"
+                      attendanceData.status === "Present"
                         ? "success.main"
-                        : attendanceData.status === "غائب"
+                        : attendanceData.status === "Absent"
                         ? "error.main"
                         : "grey.400",
                   },
                   "&:hover fieldset": {
                     borderColor:
-                      attendanceData.status === "حاضر"
+                      attendanceData.status === "Present"
                         ? "success.dark"
-                        : attendanceData.status === "غائب"
+                        : attendanceData.status === "Absent"
                         ? "error.dark"
                         : "grey.600",
                   },
                   "&.Mui-focused fieldset": {
                     borderColor:
-                      attendanceData.status === "حاضر"
+                      attendanceData.status === "Present"
                         ? "success.main"
-                        : attendanceData.status === "غائب"
+                        : attendanceData.status === "Absent"
                         ? "error.main"
                         : "primary.main",
                   },
                 },
               }}
             >
-              <MenuItem value="حاضر">
+              <MenuItem value="Present">
                 <FaUserCheck style={{ marginRight: 8 }} />
-                حاضر
+                Present
               </MenuItem>
-              <MenuItem value="غائب">
+              <MenuItem value="Present">
                 <FaUserTimes style={{ marginRight: 8 }} />
-                غائب
+                Present
               </MenuItem>
             </TextField>
           </Grid>
@@ -263,8 +263,8 @@ export default function AddAttendance() {
               }
             >
               {submitting
-                ? "جاري الحفظ..."
-                : "حفظ التفقد"}
+                ? "Saveing..."
+                : "save"}
             </Button>
           </Grid>
         </Grid>
@@ -291,7 +291,7 @@ export default function AddAttendance() {
               textAlign: "center",
             }}
           >
-            {modal.success ? "نجاح العملية" : "فشل العملية"}
+            {modal.success ? "The success of the operation" : "The operation failed."}
           </Typography>
         </DialogTitle>
         <DialogContent>
@@ -310,7 +310,7 @@ export default function AddAttendance() {
               },
             }}
           >
-            إغلاق
+            Close
           </Button>
         </DialogActions>
       </Dialog>

@@ -46,12 +46,12 @@ const AddExams = () => {
   const [submitError, setSubmitError] = useState("");
 
   const sabjects = [
-    "الرياضيات",
-    "الفيزياء",
-    "الكيمياء",
-    "اللغة العربية",
-    "اللغة الإنجليزية",
-    "الديانة",
+    "Mathematics",
+    "Physics",
+    "Chemistry",
+    "Arabic language",
+    "the English language",
+    "Religion",
   ];
 
   // ضبط تاريخ اليوم تلقائيًا
@@ -71,8 +71,8 @@ const AddExams = () => {
         const data = await res.json();
         setStudents(data);
       } catch (err) {
-        console.error("خطأ في جلب الطلاب:", err);
-        setFetchError("لم نتمكن من جلب قائمة الطلاب. تأكد من تشغيل السيرفر الخلفي.");
+        console.error("Error in fetching students:", err);
+        setFetchError("We were unable to fetch the student list. Please make sure the backend server is running.");
       } finally {
         setLoadingStudents(false);
       }
@@ -92,15 +92,15 @@ const AddExams = () => {
   const validate = () => {
     const newErrors = {};
     if (!noteData.sabject_title.trim())
-      newErrors.sabject_title = "عنوان المذاكرة مطلوب";
+      newErrors.sabject_title = "The study title is required.";
     if (!noteData.sabject_grade.trim())
-      newErrors.sabject_grade = "علامة الطالب مطلوبة";
+      newErrors.sabject_grade = "The student's grade is required.";
     if (!noteData.sabject_date)
-      newErrors.sabject_date = "تاريخ المذاكرة مطلوب";
+      newErrors.sabject_date = "The study date is required.";
     if (!noteData.student_id)
-      newErrors.student_id = "اختر الطالب";
+      newErrors.student_id = "The student chose.";
     if (!noteData.sabject_name)
-      newErrors.sabject_name = "اختر المادة";
+      newErrors.sabject_name = "Choose the subject";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -128,10 +128,10 @@ const AddExams = () => {
       setModal({
         open: true,
         success: true,
-        message: "✅ تم إضافة المذاكرة بنجاح",
+        message: "✅ The studying has been added successfully.",
       });
       const result = await res.json();
-      if (!res.ok) throw new Error(result.message || "خطأ غير معروف");
+      if (!res.ok) throw new Error(result.message || "Unknown error");
 
 
       // إعادة ضبط الحقول
@@ -145,12 +145,12 @@ const AddExams = () => {
       });
       setErrors({});
     } catch (err) {
-      console.error("خطأ أثناء الإرسال:", err);
-      setSubmitError(`لم يتم حفظ المذكرة: ${err.message}`);
+      console.error("Error during submission:", err);
+      setSubmitError(`The note has not been saved.: ${err.message}`);
       setModal({
         open: true,
         success: false,
-        message: "❌ حدث خطأ أثناء الحفظ",
+        message: "❌ An error occurred while saving.",
       });
     } finally {
       setSubmitting(false);
@@ -161,7 +161,7 @@ const AddExams = () => {
     <>
     <FormContainer component="form" onSubmit={handleSubmit}>
       <Typography sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}} fontWeight={600} mb={2} color="#1f2937">
-        إضافة مذاكرة لطالب
+        Adding study materials for a student
       </Typography>
 
       {fetchError && (
@@ -175,13 +175,13 @@ const AddExams = () => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="عنوان المذاكرة"
+            label="Study title"
             name="sabject_title"
             value={noteData.sabject_title}
             onChange={handleChange}
             error={!!errors.sabject_title}
             helperText={errors.sabject_title}
-            placeholder="مثلاً: مراجعة الوحدة الثانية"
+            placeholder="For example: Review of Unit Two"
             variant="outlined"
           />
         </Grid>
@@ -191,7 +191,7 @@ const AddExams = () => {
           <TextField
             fullWidth
             type="number"
-            label="علامة الطالب"
+            label="Student Mark"
             name="sabject_grade"
             value={noteData.sabject_grade}
             onChange={handleChange}
@@ -207,7 +207,7 @@ const AddExams = () => {
           <TextField
             fullWidth
             type="date"
-            label="تاريخ المذاكرة"
+            label="The history of studying"
             name="sabject_date"
             value={noteData.sabject_date}
             onChange={handleChange}
@@ -223,7 +223,7 @@ const AddExams = () => {
           <TextField
             select
             fullWidth
-            label="اختر الطالب"
+            label="The student chose."
             name="student_id"
             value={noteData.student_id}
             onChange={handleChange}
@@ -245,7 +245,7 @@ const AddExams = () => {
           <TextField
             select
             fullWidth
-            label="اختر المادة"
+            label="Choose the subject"
             name="sabject_name"
             value={noteData.sabject_name}
             onChange={handleChange}
@@ -285,7 +285,7 @@ const AddExams = () => {
                 "&:hover": { backgroundColor: "#1d4ed8" },
               }}
             >
-              {submitting ? <CircularProgress size={24} /> : "حفظ المذاكرة"}
+              {submitting ? <CircularProgress size={24} /> : "Save"}
             </Button>
           </Box>
         </Grid>
@@ -313,7 +313,7 @@ const AddExams = () => {
               textAlign: "center",
             }}
           >
-            {modal.success ? "نجاح العملية" : "فشل العملية"}
+            {modal.success ? "The success of the operation" : "The operation failed."}
           </Typography>
         </DialogTitle>
         <DialogContent>

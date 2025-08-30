@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FiUsers, FiEye, FiTrash2, FiX, FiLoader,FiEdit } from "react-icons/fi";
+import { FiUsers, FiEye, FiTrash2, FiX,FiEdit } from "react-icons/fi";
 import {
   Box,
   Typography,
@@ -13,7 +13,6 @@ import {
   TableHead,
   TableRow,
   CircularProgress,
-  Avatar,
   Dialog,
   IconButton,
   Button,
@@ -47,14 +46,14 @@ const handleCopy = () => {
       setModal({
         open: true,
         success: true,
-        message: "✅ تم نسخ المعرف بنجاح",
+        message: "✅ The identifier has been copied successfully.",
       });
     })
     .catch(() => {
       setModal({
         open: true,
         success: false,
-        message: "❌ حدث خطأ أثناء النسخ",
+        message: "❌ An error occurred during copying.",
       });
     });
 };
@@ -137,7 +136,7 @@ export default function ViewStudents() {
       const data = await response.json();
       setStudents(data);
     } catch (err) {
-      console.error("❌ فشل في إعادة التحميل:", err.message);
+      console.error("❌ Failed to reload:", err.message);
     } finally {
       setReloading(false);
     }
@@ -172,7 +171,7 @@ export default function ViewStudents() {
         setModal({
           open: true,
           success: true,
-          message: "✅ تم تحديث بيانات الطالب بنجاح",
+          message: "✅ The student's data has been successfully updated.",
         });
         
         // تحديث البيانات المحلية
@@ -184,14 +183,14 @@ export default function ViewStudents() {
         
         setEditModalOpen(false);
       } else {
-        throw new Error(result.message || "فشل في التحديث");
+        throw new Error(result.message || "Failed to update");
       }
     } catch (err) {
-      console.error("❌ خطأ في التحديث:", err);
+      console.error("❌ Error in the update:", err);
       setModal({
         open: true,
         success: false,
-        message: `❌ حدث خطأ أثناء التحديث: ${err.message}`,
+        message: `❌ An error occurred during the update.: ${err.message}`,
       });
     }
   };
@@ -201,12 +200,12 @@ export default function ViewStudents() {
     const fetchStudents = async () => {
       try {
         const response = await fetch("https://e-school-server.vercel.app/api/students");
-        if (!response.ok) throw new Error("فشل في جلب البيانات");
+        if (!response.ok) throw new Error("Failed to fetch the data");
 
         const data = await response.json();
         setStudents(data);
       } catch (err) {
-        console.error("❌ خطأ:", err.message);
+        console.error("❌ Error:", err.message);
         setNotification({
           type: "error",
           message: "Failed to fetch students",
@@ -227,7 +226,7 @@ export default function ViewStudents() {
   
   // delete student
   const handleDelete = async (studentId) => {
-    if (!confirm("هل تريد حذف هذا الطالب وكل بياناته؟")) return;
+    if (!confirm("Do you want to delete this student and all of their data?")) return;
   
     try {
       const res = await fetch(`https://e-school-server.vercel.app/api/students/${studentId}`, {
@@ -237,7 +236,7 @@ export default function ViewStudents() {
       setModal({
         open: true,
         success: true,
-        message: "✅ تم حذف الطالب بنجاح",
+        message: "✅ The student has been successfully deleted.",
       });
       const result = await res.json();
       if (!res.ok) {
@@ -247,11 +246,11 @@ export default function ViewStudents() {
       // حدّث حالة الطلاب في الواجهة
       setStudents(prev => prev.filter(s => s.student_id !== studentId));
     } catch (err) {
-      console.error("❌ خطأ في الحذف:", err);
+      console.error("❌ Error in deletion:", err);
       setModal({
         open: true,
         success: false,
-        message: "❌ حدث خطأ أثناء الحذف",
+        message: "❌ An error occurred while deleting.",
       });
     }
   };
@@ -292,13 +291,13 @@ export default function ViewStudents() {
             <Typography
               sx={{ fontWeight: "bold", color: "grey.800",fontSize:{xs:"17px",md:"22px",lg:"25px"}}}
             >
-              إدارة الطلاب
+              Student Management
             </Typography>
           </Box>
 
           <Box sx={{ display: "flex", gap: 2, flexDirection: { xs: "column", sm: "row" }, width: { xs: "100%", md: "auto" } }}>
             <TextField
-              placeholder="ابحث عن طلاب..."
+              placeholder="Search for students..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               sx={{ width: { xs: "100%", md: 256 } }}
@@ -336,22 +335,22 @@ export default function ViewStudents() {
             
             {/* فلتر الأقسام */}
             <FormControl sx={{ minWidth: 120, width: { xs: "100%", md: 180 } }}>
-              <InputLabel id="section-filter-label">القسم</InputLabel>
+              <InputLabel id="section-filter-label">The section</InputLabel>
               <Select
                 labelId="section-filter-label"
                 value={sectionFilter}
-                label="القسم"
+                label="The section"
                 onChange={(e) => setSectionFilter(e.target.value)}
                 sx={{ borderRadius: "12px" }}
               >
-                <MenuItem value="">كل الأقسام</MenuItem>
+                <MenuItem value="">All sections</MenuItem>
                 {uniqueSections.map((section, index) => (
                   <MenuItem key={index} value={section}>{section}</MenuItem>
                 ))}
               </Select>
             </FormControl>
             
-            <Tooltip title="إعادة تحميل">
+            <Tooltip title="Reload">
               <IconButton
                 size="small"
                 color="primary"
@@ -375,7 +374,7 @@ export default function ViewStudents() {
               <Table>
                 <TableHead sx={{ backgroundColor: "grey.50" }}>
                   <TableRow>
-                    {["الاسم", "المجموعة", "التخصص", "المدرسة", "رقم ولي الأمر", "الهاتف", "الإجراءات"].map((header, i) => (
+                    {["Name", "Group", "Specialization", "School", "Guardian's Number", "Phone", "Procedures"].map((header, i) => (
                       <TableCell
                         key={i}
                         sx={{
@@ -399,16 +398,16 @@ export default function ViewStudents() {
                         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}>
                           <Box>
                             <Typography variant="body1" sx={{ fontWeight: "medium" }}>
-                              {student.name || "غير متوفر"}
+                              {student.name || "Not available"}
                             </Typography>
 
                             <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                               <Typography variant="body2" sx={{ color: "grey.500" }}>
-                                ID: {student.student_id || "غير متوفر"}
+                                ID: {student.student_id || "Not available"}
                               </Typography>
 
                               {student.student_id && (
-                                <Tooltip title="نسخ المعرف">
+                                <Tooltip title="Copy ID">
                                   <IconButton
                                     size="small"
                                     onClick={() => {
@@ -426,31 +425,31 @@ export default function ViewStudents() {
 
                       <TableCell sx={{ textAlign: "right" }}>
                         <Typography variant="body2" sx={{ color: "grey.500" }}>
-                          {student.section || "لا يوجد"}
+                          {student.section || "There is none."}
                         </Typography>
                       </TableCell>
 
                       <TableCell sx={{ textAlign: "right" }}>
                         <Typography variant="body2" sx={{ color: "grey.500" }}>
-                          {student.specialization || "لا يوجد"}
+                          {student.specialization || "There is none."}
                         </Typography>
                       </TableCell>
 
                       <TableCell sx={{ textAlign: "right" }}>
                         <Typography variant="body2" sx={{ color: "grey.500" }}>
-                          {student.nameschool || "لا يوجد"}
+                          {student.nameschool || "There is none."}
                         </Typography>
                       </TableCell>
 
                       <TableCell sx={{ textAlign: "right" }}>
                         <Typography variant="body2" sx={{ color: "grey.500" }}>
-                          {student.guardiannum || "لا يوجد"}
+                          {student.guardiannum || "There is none."}
                         </Typography>
                       </TableCell>
 
                       <TableCell sx={{ textAlign: "right" }}>
                         <Typography variant="body2" sx={{ color: "grey.500" }}>
-                          {student.phone || "لا يوجد"}
+                          {student.phone || "There is none."}
                         </Typography>
                       </TableCell>
 
@@ -494,7 +493,7 @@ export default function ViewStudents() {
             }}
           >
             <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-              معلومات عن الطالب
+              Information about the student
             </Typography>
             <IconButton onClick={() => setOpenModal(false)}>
               <FiX style={{ fontSize: "1.5rem" }} />
@@ -513,7 +512,7 @@ export default function ViewStudents() {
               >
                 <Typography variant="h6">{selectedStudent.name}</Typography>
                 <Typography variant="body2" sx={{ color: "grey.500" }}>
-                  ID: {selectedStudent.student_id || "غير متوفر"}
+                  ID: {selectedStudent.student_id || "Not available"}
                 </Typography>
               </Box>
 
@@ -521,41 +520,41 @@ export default function ViewStudents() {
                 <Divider />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography variant="body2" sx={{ color: "grey.600" }}>
-                    المجموعة
+                    The group
                   </Typography>
                   <Typography variant="body2" sx={{ fontWeight: "medium" }}>
-                    {selectedStudent.section || "غير متوفر"}
+                    {selectedStudent.section || "Not available"}
                   </Typography>
                 </Box>
                 <Divider />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography variant="body2" sx={{ color: "grey.600" }}>
-                    التخصص
+                    The specialty
                   </Typography>
                   <Typography variant="body2" sx={{ fontWeight: "medium" }}>
-                    {selectedStudent.specialization || "غير متوفر"}
+                    {selectedStudent.specialization || "Not available"}
                   </Typography>
                 </Box>
                 <Divider />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography variant="body2" sx={{ color: "grey.600" }}>
-                    المدرسة
+                    The school
                   </Typography>
                   <Typography variant="body2" sx={{ fontWeight: "medium" }}>
-                    {selectedStudent.nameschool || "غير متوفر"}
+                    {selectedStudent.nameschool || "Not available"}
                   </Typography>
                 </Box>
                 <Divider />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography variant="body2" sx={{ color: "grey.600" }}>
-                    رقم ولي الأمر
+                    Guardian's number
                   </Typography>
                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                    <Typography variant="body2" sx={{ fontWeight: "medium" }}>
       {/* عرض الرقم مع رمز الدولة */}
       {selectedStudent.guardiannum
         ? `+963${selectedStudent.guardiannum}`
-        : "غير متوفر"}
+        : "Not available"}
     </Typography>
 
       {selectedStudent.guardiannum && (
@@ -575,14 +574,14 @@ export default function ViewStudents() {
                 <Divider />
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Typography variant="body2" sx={{ color: "grey.600" }}>
-                    الهاتف
+                    The phone
                   </Typography>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                   <Typography variant="body2" sx={{ fontWeight: "medium" }}>
       {/* عرض الرقم مع رمز الدولة */}
       {selectedStudent.phone
         ? `+963${selectedStudent.phone}`
-        : "غير متوفر"}
+        : "Not available"}
     </Typography>
       {selectedStudent.phone && (
         <IconButton
@@ -617,7 +616,7 @@ export default function ViewStudents() {
             }}
           >
             <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-              تعديل بيانات الطالب
+              Edit student data
             </Typography>
             <IconButton onClick={() => setEditModalOpen(false)}>
               <FiX style={{ fontSize: "1.5rem" }} />
@@ -636,44 +635,44 @@ export default function ViewStudents() {
               >
                 <Typography variant="h6">{selectedStudent.name}</Typography>
                 <Typography variant="body2" sx={{ color: "grey.500" }}>
-                  ID: {selectedStudent.student_id || "غير متوفر"}
+                  ID: {selectedStudent.student_id || "Not available"}
                 </Typography>
               </Box>
 
               <Box sx={{ "& > *": { mb: 2 } }}>
                 <TextField
                   fullWidth
-                  label="الاسم"
+                  label="Name"
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                 />
                 <TextField
                   fullWidth
-                  label="التخصص"
+                  label="The specialty"
                   value={formData.specialization}
                   onChange={(e) => setFormData({...formData, specialization: e.target.value})}
                 />
                 <TextField
                   fullWidth
-                  label="المجموعة"
+                  label="The group"
                   value={formData.section}
                   onChange={(e) => setFormData({...formData, section: e.target.value})}
                 />
                 <TextField
                   fullWidth
-                  label="المدرسة"
+                  label="The school"
                   value={formData.nameschool}
                   onChange={(e) => setFormData({...formData, nameschool: e.target.value})}
                 />
                 <TextField
                   fullWidth
-                  label="رقم ولي الأمر"
+                  label="Guardian's number"
                   value={formData.guardiannum}
                   onChange={(e) => setFormData({...formData, guardiannum: e.target.value})}
                 />
                 <TextField
                   fullWidth
-                  label="الهاتف"
+                  label="The phone"
                   value={formData.phone}
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
                 />
@@ -684,14 +683,14 @@ export default function ViewStudents() {
                   variant="outlined" 
                   onClick={() => setEditModalOpen(false)}
                 >
-                  إلغاء
+                  Cansel
                 </Button>
                 <Button 
                   variant="contained" 
                   onClick={handleUpdate}
                   disabled={!formData.name} // التأكد من أن الاسم غير فارغ
                 >
-                  حفظ التغييرات
+                  Save change
                 </Button>
               </Box>
             </>
@@ -746,7 +745,7 @@ export default function ViewStudents() {
               fontSize:"25px"
             }}
           >
-            {modal.success ? "نجاح العملية" : "فشل العملية"}
+            {modal.success ? "The success of the operation" : "The operation failed."}
           </Typography>
         </DialogTitle>
         <DialogContent>
@@ -765,7 +764,7 @@ export default function ViewStudents() {
               },
             }}
           >
-            إغلاق
+            Exsit
           </Button>
         </DialogActions>
       </Dialog>

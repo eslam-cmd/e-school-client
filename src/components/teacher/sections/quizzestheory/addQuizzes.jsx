@@ -30,12 +30,12 @@ const FormContainer = styled(Paper)(({ theme }) => ({
 }));
 
 const subjectOptions = [
-  "الرياضيات",
-  "الفيزياء",
-  "الكيمياء",
-  "اللغة العربية",
-  "اللغة الإنجليزية",
-  "الديانة",
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+  "Arabic Language",
+  "English Language",
+  "Religion",
 ];
 
 export default function AddQuiz() {
@@ -83,7 +83,7 @@ const [modal, setModal] = useState({
       } catch (err) {
         console.error("Fetch students error:", err);
         setFetchError(
-          "لم نتمكن من جلب قائمة الطلاب. تأكد من تشغيل الخادم."
+          "We could not fetch the student list. Please make sure the server is running."
         );
       } finally {
         setLoadingStudents(false);
@@ -103,13 +103,13 @@ const [modal, setModal] = useState({
   // تحقق من جميع الحقول قبل الإرسال
   const validate = () => {
     const newErrors = {};
-    if (!quizData.student_id) newErrors.student_id = "اختر الطالب";
+    if (!quizData.student_id) newErrors.student_id = "The student chose";
     if (!quizData.quiz_title.trim())
-      newErrors.quiz_title = "عنوان الكويز مطلوب";
-    if (!quizData.quiz_name) newErrors.quiz_name = "اختر المادة";
-    if (!quizData.quiz_date) newErrors.quiz_date = "التاريخ مطلوب";
+      newErrors.quiz_title = "The quiz title is required.";
+    if (!quizData.quiz_name) newErrors.quiz_name = "Choose the subject";
+    if (!quizData.quiz_date) newErrors.quiz_date = "History is required.";
     if (!quizData.quiz_grade.trim())
-      newErrors.quiz_grade = "درجة الكويز مطلوبة";
+      newErrors.quiz_grade = "The quiz mark is required.";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -129,11 +129,11 @@ const [modal, setModal] = useState({
         body: JSON.stringify(quizData),
       });
       const payload = await res.json();
-      if (!res.ok) throw new Error(payload.message || "خطأ غير معروف");
+      if (!res.ok) throw new Error(payload.message || "Unknown error");
       setModal({
         open: true,
         success: true,
-        message: "✅ تم إضافة الكويز بنجاح",
+        message: "✅ The quiz has been added successfully.",
       });
       // إعادة ضبط النموذج
       const today = new Date().toISOString().split("T")[0];
@@ -149,9 +149,9 @@ const [modal, setModal] = useState({
       setModal({
         open: true,
         success: false,
-        message: "❌ حدث خطأ أثناء الاضافة",
+        message: "❌ An error occurred during the addition.",
       });
-      setSubmitError(`فشل حفظ الكويز: ${err.message}`);
+      setSubmitError(`Failed to save the quiz: ${err.message}`);
     } finally {
       setSubmitting(false);
     }
@@ -161,7 +161,7 @@ const [modal, setModal] = useState({
     <>
     <FormContainer component="form" onSubmit={handleSubmit}>
       <Typography sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}} fontWeight={600} mb={2} color="#1f2937">
-        إضافة كويز نظري
+        Add a theoretical quiz
       </Typography>
 
       {fetchError && (
@@ -175,11 +175,11 @@ const [modal, setModal] = useState({
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="عنوان الكويز"
+            label="quiz title"
             name="quiz_title"
             value={quizData.quiz_title}
             onChange={handleChange}
-            placeholder="مثلاً: اختبار الوحدة الأولى"
+            placeholder="For example: the first unit test"
             error={!!errors.quiz_title}
             helperText={errors.quiz_title}
           />
@@ -190,7 +190,7 @@ const [modal, setModal] = useState({
           <TextField
             fullWidth
             type="number"
-            label="درجة الكويز"
+            label="quiz grade"
             name="quiz_grade"
             value={quizData.quiz_grade}
             onChange={handleChange}
@@ -205,7 +205,7 @@ const [modal, setModal] = useState({
           <TextField
             fullWidth
             type="date"
-            label="تاريخ الكويز"
+            label="quiz date"
             name="quiz_date"
             value={quizData.quiz_date}
             onChange={handleChange}
@@ -220,7 +220,7 @@ const [modal, setModal] = useState({
           <TextField
             select
             fullWidth
-            label="اختر الطالب"
+            label="The student chose."
             name="student_id"
             value={quizData.student_id}
             onChange={handleChange}
@@ -241,7 +241,7 @@ const [modal, setModal] = useState({
           <TextField
             select
             fullWidth
-            label="اختر المادة"
+            label="Choose the subject"
             name="quiz_name"
             value={quizData.quiz_name}
             onChange={handleChange}
@@ -280,7 +280,7 @@ const [modal, setModal] = useState({
                 "&:hover": { backgroundColor: "#1d4ed8" },
               }}
             >
-              {submitting ? <CircularProgress size={24} /> : "حفظ الكويز"}
+              {submitting ? <CircularProgress size={24} /> : "Save"}
             </Button>
           </Box>
         </Grid>
@@ -308,7 +308,7 @@ const [modal, setModal] = useState({
           fontSize:"25px"
         }}
       >
-        {modal.success ? "نجاح العملية" : "فشل العملية"}
+        {modal.success ? "The success of the operation" : "The operation failed."}
       </Typography>
     </DialogTitle>
     <DialogContent>
@@ -327,7 +327,7 @@ const [modal, setModal] = useState({
           },
         }}
       >
-        إغلاق
+        Close
       </Button>
     </DialogActions>
   </Dialog>

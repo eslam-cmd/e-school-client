@@ -31,7 +31,7 @@ const TeacherProfileCard = () => {
   const [openConfirm, setOpenConfirm] = useState(false);
   const [profile, setProfile] = useState({
     name: "",
-    subject: "مدير النظام",
+    subject: "System Administrator",
     email: "",
     password: "",
   });
@@ -84,7 +84,7 @@ const TeacherProfileCard = () => {
         // إعادة تحميل الصفحة (اختياري لأن التوجيه يعمل Reload تلقائي)
         // window.location.reload();
       } else {
-        alert("❌ فشل التحديث: " + data.error);
+        alert("❌ Update failed: " + data.error);
       }
     } catch (err) {
       alert("⚠️ خطأ في الاتصال بالخادم");
@@ -110,14 +110,14 @@ const TeacherProfileCard = () => {
       <Divider sx={{ my: 3 }} />
 
       <Typography variant="subtitle1" fontWeight={600} mb={2}>
-        تعديل البيانات
+        Edit Data
       </Typography>
 
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="الاسم"
+            label="Name"
             name="name"
             value={profile.name}
             onChange={handleChange}
@@ -127,7 +127,7 @@ const TeacherProfileCard = () => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="البريد الإلكتروني"
+            label="Email"
             name="email"
             value={profile.email}
             onChange={handleChange}
@@ -138,7 +138,7 @@ const TeacherProfileCard = () => {
         <Grid item xs={12}>
           <TextField
             fullWidth
-            label="كلمة المرور الجديدة"
+            label="The new password"
             name="password"
             type="password"
             value={profile.password}
@@ -161,23 +161,23 @@ const TeacherProfileCard = () => {
               "&:hover": { backgroundColor: "#1d4ed8" },
             }}
           >
-            حفظ التعديلات
+            Save changes
           </Button>
         </Grid>
       </Grid>
 
       {/* مودال التأكيد */}
-      <Dialog open={openConfirm} onClose={handleCloseConfirm} dir="rtl">
-        <DialogTitle>تأكيد التعديلات</DialogTitle>
+      <Dialog open={openConfirm} onClose={handleCloseConfirm} >
+        <DialogTitle>Confirmation of the amendments</DialogTitle>
         <DialogContent>
-          هل أنت متأكد أنك تريد حفظ التعديلات وتغيير الـ المعرف الشخصي؟
+        Are you sure you want to save the changes and change the personal identifier?
         </DialogContent>
         <DialogActions >
           <Button onClick={handleCloseConfirm} color="secondary">
-            إلغاء
+            Cancellation
           </Button>
           <Button onClick={handleUpdate} color="primary" variant="contained">
-            تأكيد
+            Confirmation
           </Button>
         </DialogActions>
       </Dialog>

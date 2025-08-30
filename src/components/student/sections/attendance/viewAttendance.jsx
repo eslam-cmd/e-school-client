@@ -73,7 +73,7 @@ export default function ViewAttendanceByMonth() {
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
         <Typography variant="h5" fontWeight={600} color="#1f2937" sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}}>
         <FiCalendar style={{color:"#2A52BE"}}/>
-          سجل الحضور
+          Attendance Register
         </Typography>
        
         <IconButton
@@ -95,10 +95,10 @@ export default function ViewAttendanceByMonth() {
           sx={{ height: 200 }}
         >
           <CircularProgress />
-          <Typography mt={1}>جاري التحميل...</Typography>
+          <Typography mt={1}>Loading...</Typography>
         </Box>
       ) : attendance.length === 0 ? (
-        <Typography>لا توجد سجلات حضور</Typography>
+        <Typography>There are no attendance records.</Typography>
       ) : (
         /* العرض حسب الأشهر */
         Object.entries(groupedByMonth).map(([monthYear, entries]) => (
@@ -113,13 +113,13 @@ export default function ViewAttendanceByMonth() {
                   <TableRow sx={{ backgroundColor: "#5D8AA8"}}>
                     <TableCell sx={{ color:"#000000",
   fontWeight: 700,
-  fontSize: "1rem",}}>اليوم</TableCell>
+  fontSize: "1rem",}}>Today</TableCell>
                     <TableCell sx={{ color:"#000000",
   fontWeight: 700,
-  fontSize: "1rem",}}>التاريخ</TableCell>
+  fontSize: "1rem",}}>History</TableCell>
                     <TableCell sx={{ color:"#000000",
   fontWeight: 700,
-  fontSize: "1rem",}}>الحالة</TableCell>
+  fontSize: "1rem",}}>State</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -133,7 +133,7 @@ export default function ViewAttendanceByMonth() {
                           fontWeight: 600,
                         }}
                       >
-                        {entry.status === "present" ? "حاضر" : "غائب"}
+                        {entry.status === "present" ? "Present" : "Absent"}
                       </TableCell>
                     </TableRow>
                   ))}

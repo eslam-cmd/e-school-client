@@ -1,14 +1,11 @@
 
 import StudentLoginPage from "@/components/auth/login-student/Login";
-import LoginPage from "@/components/auth/login-student/Login";
-import Footer from "@/components/Ultimit/footer";
-import Header from "@/components/Ultimit/header";
 export const metadata = {
-  title: " تسجيل الدخول",
-  description: "تسجيل الدخول للطالب",
+  title: " Login",
+  description: "Student Login",
   openGraph: {
-    title: "E-School | تسجيل الدخول",
-    description: "منصة تعليمية متكاملة لإدارة الطلاب والدروس",
+    title: "E-School | Login",
+    description: "An integrated educational platform for managing students and lessons.",
     url: "https://e-school-client.vercel.app",
     siteName: "E-School",
     images: [

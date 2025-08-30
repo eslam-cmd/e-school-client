@@ -56,7 +56,7 @@ export default function TeacherLoginPage() {
       const result = await res.json();
   
       if (!res.ok) {
-        throw new Error(result.message || "خطأ في تسجيل الدخول");
+        throw new Error(result.message || "Login error");
       }
   
       // حفظ البيانات في localStorage
@@ -64,7 +64,7 @@ export default function TeacherLoginPage() {
       localStorage.setItem("studentId", result.student.student_id);
       localStorage.setItem("studentSpecialization", result.student.specialization);
   
-      setMessage({ type: "success", text: "تم تسجيل الدخول" });
+      setMessage({ type: "success", text: "Logged in" });
       router.push("/student/my-account");
     } catch (err) {
       setMessage({ type: "error", text: err.message });
@@ -94,8 +94,7 @@ export default function TeacherLoginPage() {
             }}
           >
             <Typography fontWeight="bold" style={{ fontSize: "30px" }}>
-              مرحبا بك
-            </Typography>
+Welcome            </Typography>
             <Typography
               sx={{
                 color: "rgba(255, 255, 255, 0.7)",
@@ -103,7 +102,7 @@ export default function TeacherLoginPage() {
                 fontSize: "23px",
               }}
             >
-              ادخل المعرف الشخصي للدخول
+              Enter the personal identification number to log in
             </Typography>
           </Box>
 
@@ -114,10 +113,10 @@ export default function TeacherLoginPage() {
               <TextField
   fullWidth
   margin="normal"
-  label="المعرف الشخصي"
+  label="Personal identification"
   type="text"
   variant="outlined"
-  placeholder="ادخل المعرف الشخصي"
+  placeholder="Enter the personal identifier"
   required
   value={studentId}
   onChange={(e) => setStudentId(e.target.value)}
@@ -154,7 +153,7 @@ export default function TeacherLoginPage() {
                 )
               }
             >
-              {loading ? "جاري الدخول..." : "دخول"}
+              {loading ? "Entering..." : "Entery"}
             </Button>
             <Button
               fullWidth
@@ -174,7 +173,7 @@ export default function TeacherLoginPage() {
             >
               <Link href="/" style={{ color: "#ffff",textDecoration:"none" }}>
                 {" "}
-                الرجوع الى الصفحة الرئيسية
+                Back to Home page
               </Link>
             </Button>
             {/* Message Notification */}
@@ -203,7 +202,7 @@ export default function TeacherLoginPage() {
             sx={{ p: 2, textAlign: "center", bgcolor: "background.default" }}
           >
             <Typography variant="body2" color="text.secondary">
-              © 2025 جميع الحقوق محفوظة
+              © 2025 All rights reserved
             </Typography>
           </Box>
         </Paper>

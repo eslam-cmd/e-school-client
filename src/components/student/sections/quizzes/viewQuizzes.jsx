@@ -89,7 +89,7 @@ export default function ViewQuizByMonth() {
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Typography variant="h5" fontWeight={700} color="text.primary" sx={{fontSize:{xs:"17px",md:"22px",lg:"25px"}}}>
         <FiBookOpen style={{color:"#2A52BE"}} />
-          سجل الاختبارات النظرية
+          Record of theoretical tests
         </Typography>
         <IconButton
           onClick={async () => setQuiz(await fetchQuiz())}
@@ -109,10 +109,10 @@ export default function ViewQuizByMonth() {
           height={200}
         >
           <CircularProgress />
-          <Typography mt={1}>جاري التحميل...</Typography>
+          <Typography mt={1}>Loading...</Typography>
         </Box>
       ) : quiz.length === 0 ? (
-        <Typography align="center">لا توجد جلسات اختبار</Typography>
+        <Typography align="center">There are no exam sessions.</Typography>
       ) : (
         Object.entries(groupedByMonth).map(([monthYear, entries]) => (
           <Box key={monthYear} mb={4}>
@@ -123,11 +123,11 @@ export default function ViewQuizByMonth() {
               <Table stickyHeader>
                 <TableHead>
                   <TableRow>
-                    <HeaderCell>اليوم</HeaderCell>
-                    <HeaderCell>التاريخ</HeaderCell>
-                    <HeaderCell>عنوان الاختبار</HeaderCell>
-                    <HeaderCell>المادة</HeaderCell>
-                    <HeaderCell>الدرجة</HeaderCell>
+                    <HeaderCell>Today</HeaderCell>
+                    <HeaderCell>Date</HeaderCell>
+                    <HeaderCell>Test title</HeaderCell>
+                    <HeaderCell>Subject</HeaderCell>
+                    <HeaderCell>Mark</HeaderCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

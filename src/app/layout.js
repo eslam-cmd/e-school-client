@@ -5,11 +5,11 @@ const clientSideEmotionCache = createEmotionCache();
 
 
 export const metadata = {
-  title: "الواجهة الرئيسية",
-  description: "منصة تعليمية متكاملة لإدارة الطلاب والدروس",
+  title: "The main interface",
+  description: "An integrated educational platform for managing students and lessons.",
   openGraph: {
-    title: "E-School | لوحة التحكم",
-    description: "منصة تعليمية متكاملة لإدارة الطلاب والدروس",
+    title: "E-School | Control Panel",
+    description: "An integrated educational platform for managing students and lessons.",
     url: "https://e-school-client.vercel.app",
     siteName: "E-School",
     images: [
@@ -25,25 +25,18 @@ export const metadata = {
   }
 };
 
-
-
-
-
-
 export default function RootLayout({ children }) {
 
 
   return (
-    <>
-     <Head>
+    <html lang="ar" suppressHydrationWarning>
+      <head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Fjalla+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lalezar&display=swap" rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Monoton:wght@500&display=swap"
+          rel="stylesheet"
         />
-      </Head>
-
-    <html lang="ar" suppressHydrationWarning >
-<body suppressHydrationWarning>{children}</body>
+      </head >
+      <body dir="ltr" suppressHydrationWarning>{children}</body>
     </html>
-    </>
   );
 }

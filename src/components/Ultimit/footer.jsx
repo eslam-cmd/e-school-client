@@ -6,24 +6,14 @@ import {
   Typography,
   Link,
   Divider,
-  IconButton,
-  TextField,
-  Button,
-  Stack,
   useTheme,
 } from "@mui/material";
 import {
   Facebook,
-  Twitter,
-  LinkedIn,
-  Instagram,
-  YouTube,
-  Email,
   Phone,
   LocationOn,
   Send,
 } from "@mui/icons-material";
-import DesignServicesIcon from '@mui/icons-material/DesignServices';
 import { useState } from "react";
 import AboutIslam from "../home/aboutislam/aboutIslam"; 
 import AddTaskIcon from '@mui/icons-material/AddTask';
@@ -33,7 +23,6 @@ const Footer = () => {
   const [openModal, setOpenModal] = useState(false);
   return (
     <Box
-      dir="rtl"
       component="footer"
       sx={{
         backgroundColor:
@@ -76,12 +65,10 @@ const Footer = () => {
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                معهد الاوائل التعليمي <SchoolIcon style={{color:"#0D8CAB"}}/>
+                Institute of the Future <SchoolIcon style={{color:"#0D8CAB"}}/>
               </Typography>
             </Box>
-            <Typography variant="body2" sx={{ mb: 3, color: "text.secondary" }}>
-              نقدم أفضل البرامج التعليمية لتأهيل جيل رقمي متميز بأحدث المناهج
-              وأفضل المدربين.
+            <Typography variant="body2" sx={{ mb: 3, color: "text.secondary" }}>We provide the best educational programs to qualify an outstanding digital generation with the latest curricula and the best trainers.
             </Typography>
 
         
@@ -99,7 +86,7 @@ const Footer = () => {
                   sx={{ color: "primary.main", mr: 1, fontSize: "1rem" }}
                 />
                 <Typography variant="body2" color="text.secondary">
-                   +963944412860
+                   +963958359136
                 </Typography>
                 
               </Box>
@@ -108,7 +95,7 @@ const Footer = () => {
                   sx={{ color: "primary.main", mr: 1, fontSize: "1rem" }}
                 />
                 <Typography variant="body2" color="text.secondary">
-                +963966263995
+                +963958359136
                 </Typography>
                  
               </Box>
@@ -122,7 +109,7 @@ const Footer = () => {
                 
                 >
                    {" "}
-                   معهد الاوائل
+                   Institute of the Future
                 </Typography>
                 </Link>
               </Box>
@@ -131,7 +118,7 @@ const Footer = () => {
                   sx={{ color: "primary.main", mr: 1, fontSize: "1rem" }}
                 />
                 <Typography variant="body2" color="text.secondary">
-                  حلب ,الجميلية, جانب جامع الصديق {" "}
+                  Syria. Aleppo {" "}
                 </Typography>
               </Box>
               <Box sx={{ display: "flex", alignItems: "center",direction: "ltr" }}>
@@ -141,7 +128,7 @@ const Footer = () => {
   sx={{ color: "primary.main",cursor:"pointer", textDecoration: "underline" }}
   onClick={() => setOpenModal(true)}
 >
-  احجز تصميمك الآن مع إسلام هدايا 
+  Book your design now with Islam Hadaya 
 </Typography>
               </Box>
             </Box>
@@ -159,7 +146,7 @@ const Footer = () => {
           }}
         >
           <Typography variant="body2" color="text.secondary">
-            . ©جميع الحقوق محفوظة.{new Date().getFullYear()}
+            . © All rights reserved.{new Date().getFullYear()}
             
           </Typography>
           
@@ -170,7 +157,7 @@ const Footer = () => {
               color="text.secondary"
               underline="hover"
             >
-              سياسة الخصوصية
+              Privacy Policy
             </Link>
             <Link
               href="/"
@@ -178,7 +165,7 @@ const Footer = () => {
               color="text.secondary"
               underline="hover"
             >
-              الشروط والأحكام
+              Terms and Conditions
             </Link>
             <Link
               href="/"
@@ -186,7 +173,7 @@ const Footer = () => {
               color="text.secondary"
               underline="hover"
             >
-              خريطة الموقع
+              Site map
             </Link>
           </Box>
         </Box>

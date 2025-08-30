@@ -51,7 +51,7 @@ export default function TeacherLoginPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "حدث خطأ أثناء تسجيل الدخول");
+        throw new Error(data.error || "An error occurred while logging in.");
       }
       
       // حفظ الاسم و الـ ID في localStorage
@@ -81,13 +81,13 @@ export default function TeacherLoginPage() {
             }}
           >
             <Typography fontWeight="bold" sx={{ fontSize: 30 }}>
-              لوحة تحكم الاستاذ 
+              Teacher's control panel 
             </Typography>
             <Typography
               variant="body2"
               sx={{ color: "rgba(255,255,255,0.7)", mt: 1, fontSize: 23 }}
             >
-              سجل دخول للاستمرار
+              Log in to continue
             </Typography>
           </Box>
 
@@ -95,7 +95,7 @@ export default function TeacherLoginPage() {
             <TextField
               fullWidth
               margin="normal"
-              label="الاسم"
+              label="Name"
               type="text"
               required  value={name}
               onChange={(e) => setName(e.target.value)}            
@@ -111,7 +111,7 @@ export default function TeacherLoginPage() {
             <TextField
               fullWidth
               margin="normal"
-              label="البريد الإلكتروني"
+              label="Email"
               type="email"
               required
               value={email}
@@ -128,7 +128,7 @@ export default function TeacherLoginPage() {
             <TextField
               fullWidth
               margin="normal"
-              label="كلمة السر"
+              label="Password"
               type="password"
               required
               value={password}
@@ -163,7 +163,7 @@ export default function TeacherLoginPage() {
                 )
               }
             >
-              {loading ? "جاري تسجيل الدخول..." : "تسجيل الدخول"}
+              {loading ? "Logging in..." : "Login"}
             </Button>
 
             <Button
@@ -182,7 +182,7 @@ export default function TeacherLoginPage() {
               startIcon={<HomeIcon />}
             >
               <Link href="/" style={{ color: "#fff", textDecoration: "none" }}>
-                العودة للصفحة الرئيسية
+                Back to Home page
               </Link>
             </Button>
 
@@ -196,7 +196,7 @@ export default function TeacherLoginPage() {
           <Divider />
           <Box sx={{ p: 2, textAlign: "center", bgcolor: "background.default" }}>
             <Typography variant="body2" color="text.secondary">
-              © 2025 جميع الحقوق محفوظة.
+             © 2025 All rights reserved.
             </Typography>
           </Box>
         </Paper>
